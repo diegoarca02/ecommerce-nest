@@ -1,0 +1,7 @@
+.direccion-selected{
+    border: 1px dashed #ccc;
+}
+
+.card-products::-webkit-scrollbar{
+    width: 5px;
+}

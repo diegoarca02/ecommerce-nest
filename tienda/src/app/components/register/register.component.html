@@ -1,0 +1,108 @@
+<app-navbar></app-navbar>
+<app-bar></app-bar>
+
+<section class="py-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-sm-12 mx-auto">
+                <!-- Card -->
+            <div class="card card-lg">
+                <div class="card-body">
+  
+                  <!-- Heading -->
+                  <h6 class="mb-7">
+                    Nuevo cliente
+                  </h6>
+  
+                  <!-- Form -->
+                  <div class="row">
+                    <div class="col-12">
+
+                      <!-- Email -->
+                      <div class="form-group">
+                        <label class="visually-hidden" for="registerFirstName">
+                          Nombres completos *
+                        </label>
+                        <input class="form-control form-control-sm" type="text" placeholder="Nombres completos *" name="nombres" [(ngModel)]="cliente.nombres">
+                      </div>
+
+                    </div>
+                    <div class="col-12">
+
+                      <!-- Email -->
+                      <div class="form-group">
+                        <label class="visually-hidden" for="registerLastName">
+                          Apellidos completos *
+                        </label>
+                        <input class="form-control form-control-sm" type="text" placeholder="Apellidos completos *" name="apellidos" [(ngModel)]="cliente.apellidos">
+                      </div>
+
+                    </div>
+                    <div class="col-12">
+
+                      <!-- Email -->
+                      <div class="form-group">
+                        <label class="visually-hidden" for="registerEmail">
+                          Email *
+                        </label>
+                        <input class="form-control form-control-sm" type="email" placeholder="Email *" name="email" [(ngModel)]="cliente.email">
+                      </div>
+
+                    </div>
+                    <div class="col-12 col-md-6">
+
+                      <!-- Password -->
+                      <div class="form-group">
+                        <label class="visually-hidden" for="registerPassword">
+                          Contraseña *
+                        </label>
+                        <input class="form-control form-control-sm"  type="password" placeholder="Contraseña *" name="password" [(ngModel)]="cliente.password">
+                      </div>
+
+                    </div>
+                    <div class="col-12 col-md-6">
+
+                      <!-- Password -->
+                      <div class="form-group">
+                        <label class="visually-hidden" for="registerPasswordConfirm">
+                          Confirmacion de contraseña *
+                        </label>
+                        <input class="form-control form-control-sm"  type="password" placeholder="Confirmacion *" name="password_confirm" [(ngModel)]="cliente.password_confirm">
+                      </div>
+
+                    </div>
+                    <div class="col-12 col-md-auto text-center">
+
+                      <div *ngIf="msm_error" class="text-danger" style="margin-bottom: 1rem;">
+                        {{msm_error}}
+                      </div>
+
+                      <!-- Link -->
+                      <div class="form-group fs-sm text-muted">
+                          Al registrar sus datos, acepta nuestros Términos y condiciones y nuestra Política de privacidad y cookies.
+                      </div>
+
+                    </div>
+                    
+                    <div class="col-12 text-center">
+
+                      <!-- Button -->
+                      <button *ngIf="!btn_load" class="btn btn-sm btn-dark w-100" type="button" (click)="validate()">
+                        Registrar
+                      </button>
+                      <button *ngIf="btn_load" class="btn btn-sm btn-dark w-100" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Procesando...
+                      </button>
+
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-12 col-md-6">
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label" for="accountFirstName">
+            Nombres *
+          </label>
+          <input class="form-control form-control-sm" type="text" placeholder="Nombres Completos" required name="nombres" [(ngModel)]="direccion.nombres">
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label" for="accountFirstName">
+            Apellidos *
+          </label>
+          <input class="form-control form-control-sm" type="text" placeholder="Apellidos Completos" required name="apellidos" [(ngModel)]="direccion.apellidos">
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <!-- Email -->
+      <div class="form-group">
+        <label class="form-label" for="accountFirstName">
+          Prefijo *
+        </label>
+        <select name="prefijo" [(ngModel)]="direccion.prefijo" class="form-select form-select-sm">
+          <option value="" selected disabled>Seleccionar</option>
+          <option value="+51">Perú</option>
+          <option value="+1">Estados Unidos</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label" for="accountFirstName">
+            Telefono *
+          </label>
+          <input class="form-control form-control-sm" type="number" placeholder="Telefono" required name="telefono" [(ngModel)]="direccion.telefono">
+        </div>
+    </div>
+
+    <div class="col-12 mb-5">
+      <div id="myMap" style="height: 400px;">
+
+      </div>
+    </div>
+
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <button class="btn btn-dark" (click)="update()">Actualizar Dirección</button>
+      <div>
+        <span class="text-danger" *ngIf="msm_error">{{msm_error}}</span>
+        <span class="text-success" *ngIf="msm_success">{{msm_success}}</span>
+      </div>
+    </div>
+</div>

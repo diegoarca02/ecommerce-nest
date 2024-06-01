@@ -1,0 +1,308 @@
+<!-- NAVBAR -->
+<div class="navbar navbar-topbar navbar-expand-xl navbar-light bg-light">
+    <div class="container">
+  
+      <!-- Promo -->
+      <div class="me-xl-8">
+        <i class="fe fe-truck me-2"></i> <span class="heading-xxxs">
+          Envio gratis a compras mayor de 100USD
+        </span>
+      </div>
+  
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbarCollapse" aria-controls="topbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="topbarCollapse">
+  
+        <!-- Nav -->
+        <ul class="nav nav-divided navbar-nav me-auto">
+          <li class="nav-item dropdown">
+  
+            <!-- Toggle -->
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+              {{CURRENCY}}
+            </a>
+  
+            <!-- Menu -->
+            <div class="dropdown-menu min-w-0">
+              <a class="dropdown-item" style="cursor: pointer;" (click)="CURRENCY = 'USD'" >USD</a>
+              <a class="dropdown-item" style="cursor: pointer;" (click)="CURRENCY = 'PEN'" >PEN</a>
+            </div>
+  
+          </li>
+          <li class="nav-item dropdown">
+  
+            <!-- Toggle -->
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+              {{IDIOMA}}
+            </a>
+  
+            <!-- Menu -->
+            <div class="dropdown-menu min-w-0">
+              <a class="dropdown-item" style="cursor: pointer;" (click)="IDIOMA = 'Español'">Español</a>
+              <a class="dropdown-item" style="cursor: pointer;" (click)="IDIOMA = 'Ingles'">Ingles</a>
+            </div>
+  
+          </li>
+        </ul>
+  
+        <!-- Nav -->
+        <ul class="nav navbar-nav me-8">
+          <li class="nav-item">
+            <a class="nav-link" href="./shipping-and-returns.html">Shipping</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./faq.html">FAQ</a>
+          </li>
+          <li class="nav-item"  *ngIf="user != null">
+            <a style="cursor: pointer !important;" class="nav-link cursor-pointer" (click)="logout()">
+              Cerrar sesión
+            </a>
+          </li>
+        </ul>
+  
+        <!-- Nav -->
+        <ul class="nav navbar-nav flex-row">
+          <li class="nav-item">
+            <a class="nav-link text-gray-350" href="#!">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li class="nav-item ms-xl-n4">
+            <a class="nav-link text-gray-350" href="#!">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li class="nav-item ms-xl-n4">
+            <a class="nav-link text-gray-350" href="#!">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+          <li class="nav-item ms-xl-n4">
+            <a class="nav-link text-gray-350" href="#!">
+              <i class="fab fa-medium"></i>
+            </a>
+          </li>
+        </ul>
+  
+      </div>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand" [routerLink]="['/']" >
+      SmartShop.
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapse -->
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+
+      <!-- Nav -->
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item dropdown">
+          <!-- Toggle -->
+          <a class="nav-link" [routerLink]="['/']">Inicio</a>
+        </li>
+        <li class="nav-item dropdown">
+          <!-- Toggle -->
+          <a class="nav-link" [routerLink]="['/tienda']">Tienda</a>
+        </li>
+      </ul>
+
+      <!-- Nav -->
+      <ul class="navbar-nav flex-row">
+        
+        <li class="nav-item ms-lg-n4">
+          <a *ngIf="user == null" class="nav-link" [routerLink]="['/login']">
+            <i class="fe fe-user"></i>
+          </a>
+          
+          <a *ngIf="user != null" class="nav-link" [routerLink]="['/cuenta']">
+            <i class="fe fe-user me-2"></i> 
+            <span style="font-size: .85rem;">{{user.nombres.trim().split(' ')[0]}}</span>
+          </a>
+        </li>
+        <li class="nav-item ms-lg-n4">
+          <a class="nav-link" data-bs-toggle="offcanvas" href="#modalShoppingCart">
+            <span [attr.data-cart-items]="cart.length">
+              <i class="fe fe-shopping-cart"></i>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+</nav>
+
+<div class="offcanvas offcanvas-end" id="modalShoppingCart" tabindex="-1" role="dialog" aria-modal="true" style="visibility: visible;    overflow-y: hidden !important;">
+  
+  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+    <i class="fe fe-x" aria-hidden="true"></i>
+  </button>
+
+  <!-- Header-->
+  <div class="offcanvas-header lh-fixed fs-lg">
+    <strong class="mx-auto">Carrito ({{cart.length}})</strong>
+  </div>
+
+  <!-- List group -->
+  <ul class="list-group list-group-lg list-group-flush" *ngIf="user == null" style="overflow-y: auto !important;">
+    <ng-container *ngFor="let item of cart;let idx = index">
+      <li class="list-group-item">
+        <div class="row align-items-center">
+          <div class="col-4">
+  
+            <!-- Image -->
+            <a [routerLink]="['/'+item.slug]">
+              <img class="img-fluid" [src]="url+'/getProductoPortada/'+item.portada" alt="...">
+            </a>
+  
+          </div>
+          <div class="col-8">
+  
+            <!-- Title -->
+            <p class="fs-sm fw-bold mb-6">
+              <a class="text-body" [routerLink]="['/'+item.slug]">
+                {{item.titulo}}
+              </a> 
+              <br>
+              <span class="text-muted">{{item.precio|currency:'USD'}}</span>
+            </p>
+  
+            <!--Footer -->
+            <div class="d-flex align-items-center">
+  
+              <!-- Select -->
+              <select disabled="" class="form-select form-select-xxs w-auto" name="cantidad" [(ngModel)]="item.cantidad">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+  
+              <!-- Remove -->
+              <a style="cursor: pointer !important;" class="fs-xs text-gray-400 ms-auto cursor-pointer" (click)="quitar_producto(idx)">
+                <i class="fe fe-x"></i> Eliminar
+              </a>
+  
+            </div>
+  
+          </div>
+        </div>
+      </li>
+    </ng-container>
+  </ul>
+
+  <ng-container *ngIf="user != null">
+    <ul *ngIf="!load_cart" class="list-group list-group-lg list-group-flush" style="overflow-y: auto !important;">
+      <ng-container *ngFor="let item of cart; let idx = index">
+        <li class="list-group-item">
+          <div class="row align-items-center">
+            <div class="col-4">
+    
+              <!-- Image -->
+              <a [routerLink]="['/'+item.producto.slug]">
+                <img class="img-fluid" [src]="url+'/getProductoPortada/'+item.producto.portada" alt="...">
+              </a>
+    
+            </div>
+            <div class="col-8">
+    
+              <!-- Title -->
+              <p class="fs-sm fw-bold mb-6">
+                <a class="text-body" [routerLink]="['/'+item.producto.slug]">
+                  {{item.producto.titulo}}
+                </a> 
+                <br>
+                <span class="text-muted">{{item.producto_variedad.precio|currency:'USD'}}</span>
+              </p>
+    
+              <!--Footer -->
+              <div class="d-flex align-items-center">
+    
+                <!-- Select -->
+                <select disabled="" class="form-select form-select-xxs w-auto" name="cantidad" [(ngModel)]="item.cantidad">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+    
+                <!-- Remove -->
+                <a style="cursor: pointer;" class="fs-xs text-gray-400 ms-auto cursor-pointer" (click)="quitar_producto(item._id)">
+                  <i class="fe fe-x"></i> Eliminar
+                </a>
+    
+              </div>
+    
+            </div>
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+    <div class="text-center" *ngIf="load_cart">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </ng-container>
+  
+
+  <!-- Footer -->
+  <div class="offcanvas-footer justify-between lh-fixed fs-sm bg-light mt-auto">
+    <strong>Subtotal</strong> <strong class="ms-auto">
+      {{total|currency:'USD'}}
+    </strong>
+  </div>
+
+  <!-- Buttons -->
+  <div class="offcanvas-body">
+    <a class="btn w-100 btn-dark" [routerLink]="['/checkout']">Checkout</a>
+    <button class="btn w-100 btn-outline-dark mt-2" (click)="redirect('/cart')">Ver carrito</button>
+  </div>
+
+  <!-- Empty cart (remove `.d-none` to enable it) -->
+  <div class="d-none">
+
+    <!-- Close -->
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+      <i class="fe fe-x" aria-hidden="true"></i>
+    </button>
+
+    <!-- Header-->
+    <div class="offcanvas-header lh-fixed fs-lg">
+      <strong class="mx-auto">Your Cart (0)</strong>
+    </div>
+
+    <!-- Body -->
+    <div class="offcanvas-body flex-grow-0 my-auto">
+
+      <!-- Heading -->
+      <h6 class="mb-7 text-center">Your cart is empty 😞</h6>
+
+      <!-- Button -->
+      <a class="btn w-100 btn-outline-dark" href="#!">
+        Continue Shopping
+      </a>
+
+    </div>
+
+  </div>
+
+</div>

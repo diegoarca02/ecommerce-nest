@@ -1,0 +1,714 @@
+<app-navbar></app-navbar>
+<app-bar></app-bar>
+
+    <ng-container  *ngIf="load_data">
+        <div class="container">
+            <div class="row py-15">
+                <div class="col-lg-12 text-center">
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!load_data">
+        <!-- BREADCRUMB -->
+        <nav class="my-5 mb-7">
+            <div class="container">
+            <div class="row">
+                <div class="col-12">
+        
+                <!-- Breadcrumb -->
+                <ol class="breadcrumb mb-0 fs-xs text-gray-400">
+                    <li class="breadcrumb-item">
+                    <a class="text-reset" [routerLink]="['/']">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="text-reset" [routerLink]="['/tienda']">Tienda</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <span style="color: black;text-transform: uppercase;letter-spacing: 1px;font-weight: 500;">
+                            {{producto.titulo}}
+                        </span>
+                    </li>
+                </ol>
+        
+                </div>
+            </div>
+            </div>
+        </nav>
+    
+
+        <!-- PRODUCT -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12" >
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                
+                            <!-- Card -->
+                            <div class="card pb-4" style="background-color: #f5f5f5;">
+                
+                                <!-- Badge -->
+                                <!-- <div class="badge bg-primary card-badge text-uppercase">
+                                Sale
+                                </div> -->
+                
+                                <!-- Slider -->
+                                <div class="" id="productSlider">
+                
+                                    <!-- Item -->
+                                    <a *ngFor="let item of galeria" href="#" [attr.data-bigpicture]='{ "imgSrc": url+"/getProductoPortada/"+item.imagen}'>
+                                        <img [src]="url+'/getProductoPortada/'+item.imagen" alt="..." class="card-img-top">
+                                    </a>
+                
+                                </div>
+                
+                            </div>
+                
+                            <!-- Slider -->
+                            <div class="flickity-nav mx-n2 mb-10 mb-md-0">
+                
+                                <!-- Item -->
+                                <div  *ngFor="let item of galeria" href="#" class="col-12 px-2" style="max-width: 113px;">
+                
+                                    <!-- Image -->
+                                    <div class="ratio ratio-1x1 bg-cover" style="background-image: url({{url}}/getProductoPortada/{{item.imagen}});">
+                                    </div>
+                
+                                </div>
+                
+                
+                            </div>
+                
+                            </div>
+                            <div class="col-12 col-md-6 ps-lg-10">
+                
+                            <!-- Header -->
+                            <div class="row mb-1">
+                                <div class="col">
+                
+                                <!-- Preheading -->
+                                <code style="color: #646060 !important;
+                                font-size: .8rem !important;">
+                                  {{producto.clasificacion}} - {{producto.categoria.titulo}}
+                                </code>
+                
+                                </div>
+                            </div>
+                
+                            <!-- Heading -->
+                            <h3 class="mb-2 fw-600">
+                                {{producto.titulo}}
+                            </h3>
+                
+                            <!-- Price -->
+                            <div class="mb-7">
+                                <!-- <span class="fs-lg fw-bold text-gray-350 text-decoration-line-through">
+                                    $115.00
+                                </span> -->
+                                <span class="ms-1 fs-5 fw-bolder" style="    color: #646060 !important;
+                                font-size: 1.8rem !important;">
+                                    {{variaciones[0].precio|currency:'USD'}}
+                                </span>
+                                <span class="fs-sm ms-1" *ngIf="variaciones[0].cantidades >= 1">
+                                    (En stock)
+                                </span>
+                            </div>
+                
+                            <!-- Form -->
+                            <form>
+                                <div class="form-group">
+                                    <!-- Label -->
+                                    <p class="mb-5">
+                                        Color: 
+                                        <strong *ngIf="variacion.color != undefined">
+                                          {{variacion.color}} - {{variacion.talla}}
+                                        </strong>
+                                        <strong *ngIf="variacion.color == undefined">
+                                          Color y talla pendiente.
+                                        </strong>
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                
+                
+                                <!-- Radio -->
+                                <div class="mb-2">
+                                    <div class="form-check form-check-inline form-check-size mb-2"  *ngFor="let subitem of variaciones" [ngClass]="{'variacion-active': variacion._id == subitem._id}"  [ngStyle]="{'background-color': subitem.hxd}" (click)="selectedVariacion(subitem)">
+                          
+                                      <label class="form-check-label text-white" for="sizeRadioOne">
+                                          <div style="padding: 2px;background: black;">{{subitem.talla}}</div>
+                                      </label>
+                                    </div>
+                                </div>
+                
+                                <!-- Size chart -->
+                                <p class="mb-8">
+                                    <img src="assets/img/icon-ruler.svg" alt="..." class="img-fluid">
+                                    <a class="text-reset text-decoration-underline ms-3" data-bs-toggle="modal" href="#modalSizeChart">
+                                        Guía de tallas
+                                    </a>
+                                </p>
+
+                                <div *ngIf="message.text" class="alert" [ngClass]="{'alert-success': message.type == 1,'alert-danger': message.type == 2}" role="alert">
+                                  {{message.text}}
+                                </div>
+
+                                <p class="text-muted" style="font-size: .9rem;text-align: justify;">
+                                    {{producto.descripcion}}
+                                </p>
+                
+                                <div class="row gx-5 mb-7">
+                                    <div class="col-12 col-lg-auto">
+                
+                                    <!-- Quantity -->
+                                    <select class="form-select mb-2" name="cantidad" [(ngModel)]="cantidad">
+                                        <option value="1" selected>1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                
+                                    </div>
+                                    <div class="col-12 col-lg">
+                
+                                      <!-- Submit -->
+                                      <button (click)="toCartUser()" *ngIf="user != null" type="submit" class="btn w-100 btn-dark mb-2">
+                                          Al carrito 1 <i class="fe fe-shopping-cart ms-2"></i>
+                                      </button>
+                                      <button (click)="toCartNoUser()" *ngIf="user == null" class="btn w-100 btn-dark mb-2">
+                                        Al carrito 2 <i class="fe fe-shopping-cart ms-2"></i>
+                                    </button>
+                                    </div>
+                            
+                                </div>
+
+                
+                                <!-- Share -->
+                                <p class="mb-0">
+                                    <span class="me-4">Compartir:</span>
+                                    <a style="    background-color: #ddd;" class="btn btn-xxs btn-circle btn-light fs-xxxs text-gray-350 me-3" href="#!">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a style="    background-color: #ddd;" class="btn btn-xxs btn-circle btn-light fs-xxxs text-gray-350 me-3" href="#!">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a style="    background-color: #ddd;" class="btn btn-xxs btn-circle btn-light fs-xxxs text-gray-350" href="#!">
+                                        <i class="fab fa-pinterest-p"></i>
+                                    </a>
+                                </p>
+                
+                                </div>
+                            </form>
+                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+            <!-- PRODUCTS -->
+        <section class="pt-11">
+            <div class="container">
+            <div class="row">
+                <div class="col-12">
+        
+                <!-- Heading -->
+                <h4 class="mb-10 text-center">You might also like</h4>
+        
+                <!-- Items -->
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+        
+                    <!-- Card -->
+                    <div class="card mb-7">
+        
+                        <!-- Badge -->
+                        <div class="badge bg-white text-body card-badge card-badge-start text-uppercase">
+                        New
+                        </div>
+        
+                        <!-- Image -->
+                        <div class="card-img">
+        
+                        <!-- Image -->
+                        <a class="card-img-hover" href="product.html">
+                            <img class="card-img-top card-img-back" src="assets/img/products/product-120.jpg" alt="...">
+                            <img class="card-img-top card-img-front" src="assets/img/products/product-5.jpg" alt="...">
+                        </a>
+        
+                        <!-- Actions -->
+                        <div class="card-actions">
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-bs-toggle="modal" data-bs-target="#modalProduct">
+                                <i class="fe fe-eye"></i>
+                            </button>
+                            </span>
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="button">
+                                <i class="fe fe-shopping-cart"></i>
+                            </button>
+                            </span>
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="button">
+                                <i class="fe fe-heart"></i>
+                            </button>
+                            </span>
+                        </div>
+        
+                        </div>
+        
+                        <!-- Body -->
+                        <div class="card-body px-0">
+        
+                        <!-- Category -->
+                        <div class="fs-xs">
+                            <a class="text-muted" href="shop.html">Shoes</a>
+                        </div>
+        
+                        <!-- Title -->
+                        <div class="fw-bold">
+                            <a class="text-body" href="product.html">
+                            Leather mid-heel Sandals
+                            </a>
+                        </div>
+        
+                        <!-- Price -->
+                        <div class="fw-bold text-muted">
+                            $129.00
+                        </div>
+        
+                        </div>
+        
+                    </div>
+        
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+        
+                    <!-- Card -->
+                    <div class="card mb-7">
+        
+                        <!-- Image -->
+                        <div class="card-img">
+        
+                        <!-- Image -->
+                        <a class="card-img-hover" href="product.html">
+                            <img class="card-img-top card-img-back" src="assets/img/products/product-121.jpg" alt="...">
+                            <img class="card-img-top card-img-front" src="assets/img/products/product-6.jpg" alt="...">
+                        </a>
+        
+                        <!-- Actions -->
+                        <div class="card-actions">
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-bs-toggle="modal" data-bs-target="#modalProduct">
+                                <i class="fe fe-eye"></i>
+                            </button>
+                            </span>
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="button">
+                                <i class="fe fe-shopping-cart"></i>
+                            </button>
+                            </span>
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="button">
+                                <i class="fe fe-heart"></i>
+                            </button>
+                            </span>
+                        </div>
+        
+                        </div>
+        
+                        <!-- Body -->
+                        <div class="card-body px-0">
+        
+                        <!-- Category -->
+                        <div class="fs-xs">
+                            <a class="text-muted" href="shop.html">Dresses</a>
+                        </div>
+        
+                        <!-- Title -->
+                        <div class="fw-bold">
+                            <a class="text-body" href="product.html">
+                            Cotton floral print Dress
+                            </a>
+                        </div>
+        
+                        <!-- Price -->
+                        <div class="fw-bold text-muted">
+                            $40.00
+                        </div>
+        
+                        </div>
+        
+                    </div>
+        
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+        
+                    <!-- Card -->
+                    <div class="card mb-7">
+        
+                        <!-- Badge -->
+                        <div class="badge bg-dark card-badge card-badge-start text-uppercase">
+                        Sale
+                        </div>
+        
+                        <!-- Image -->
+                        <div class="card-img">
+        
+                        <!-- Image -->
+                        <a class="card-img-hover" href="product.html">
+                            <img class="card-img-top card-img-back" src="assets/img/products/product-122.jpg" alt="...">
+                            <img class="card-img-top card-img-front" src="assets/img/products/product-7.jpg" alt="...">
+                        </a>
+        
+                        <!-- Actions -->
+                        <div class="card-actions">
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-bs-toggle="modal" data-bs-target="#modalProduct">
+                                <i class="fe fe-eye"></i>
+                            </button>
+                            </span>
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="button">
+                                <i class="fe fe-shopping-cart"></i>
+                            </button>
+                            </span>
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="button">
+                                <i class="fe fe-heart"></i>
+                            </button>
+                            </span>
+                        </div>
+        
+                        </div>
+        
+                        <!-- Body -->
+                        <div class="card-body px-0">
+        
+                        <!-- Category -->
+                        <div class="fs-xs">
+                            <a class="text-muted" href="shop.html">Shoes</a>
+                        </div>
+        
+                        <!-- Title -->
+                        <div class="fw-bold">
+                            <a class="text-body" href="product.html">
+                            Leather Sneakers
+                            </a>
+                        </div>
+        
+                        <!-- Price -->
+                        <div class="fw-bold">
+                            <span class="fs-xs text-gray-350 text-decoration-line-through">$85.00</span>
+                            <span class="text-primary">$85.00</span>
+                        </div>
+        
+                        </div>
+        
+                    </div>
+        
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 d-md-none d-lg-block">
+        
+                    <!-- Card -->
+                    <div class="card mb-7">
+        
+                        <!-- Image -->
+                        <div class="card-img">
+        
+                        <!-- Image -->
+                        <a href="#!">
+                            <img class="card-img-top card-img-front" src="assets/img/products/product-8.jpg" alt="...">
+                        </a>
+        
+                        <!-- Actions -->
+                        <div class="card-actions">
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-bs-toggle="modal" data-bs-target="#modalProduct">
+                                <i class="fe fe-eye"></i>
+                            </button>
+                            </span>
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="button">
+                                <i class="fe fe-shopping-cart"></i>
+                            </button>
+                            </span>
+                            <span class="card-action">
+                            <button class="btn btn-xs btn-circle btn-white-primary" data-toggle="button">
+                                <i class="fe fe-heart"></i>
+                            </button>
+                            </span>
+                        </div>
+        
+                        </div>
+        
+                        <!-- Body -->
+                        <div class="card-body px-0">
+        
+                        <!-- Category -->
+                        <div class="fs-xs">
+                            <a class="text-muted" href="shop.html">Tops</a>
+                        </div>
+        
+                        <!-- Title -->
+                        <div class="fw-bold">
+                            <a class="text-body" href="product.html">
+                            Cropped cotton Top
+                            </a>
+                        </div>
+        
+                        <!-- Price -->
+                        <div class="fw-bold text-muted">
+                            $29.00
+                        </div>
+        
+                        </div>
+        
+                    </div>
+        
+                    </div>
+                </div>
+        
+                </div>
+            </div>
+            </div>
+        </section>
+    </ng-container>
+
+
+
+<app-footer></app-footer>
+
+
+<div class="modal fade" id="modalSizeChart" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+  
+        <!-- Close -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fe fe-x" aria-hidden="true"></i>
+        </button>
+  
+        <!-- Header-->
+        <div class="modal-header lh-fixed fs-lg">
+          <strong class="mx-auto">Size Chart</strong>
+        </div>
+  
+        <!-- Body -->
+        <div class="modal-body border-bottom">
+  
+          <!-- Header -->
+          <div class="d-flex mb-7">
+  
+            <!-- Heading -->
+            <h5 class="mb-0">Clothing</h5>
+  
+            <!-- Inputs -->
+            <div class="ms-auto">
+  
+              <!-- IN -->
+              <input type="radio" class="btn-check" name="modalSizeChartUnitOne" id="inOne" checked="">
+              <label class="btn btn-xxs btn-circle btn-outline-dark fs-xxxs rounded-0" for="inOne">IN</label>
+  
+              <!-- CM -->
+              <input type="radio" class="btn-check" name="modalSizeChartUnitOne" id="cmOne">
+              <label class="btn btn-xxs btn-circle btn-outline-dark fs-xxxs rounded-0" for="cmOne">CM</label>
+  
+            </div>
+  
+          </div>
+  
+          <!-- Table -->
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>Size</th>
+                  <th>US</th>
+                  <th>Bust</th>
+                  <th>Waist</th>
+                  <th>Hips</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>XS</td>
+                  <td>2</td>
+                  <td>32</td>
+                  <td>24 - 25</td>
+                  <td>33 - 34</td>
+                </tr>
+                <tr>
+                  <td>S</td>
+                  <td>4</td>
+                  <td>34 - 35</td>
+                  <td>26 - 27</td>
+                  <td>35 - 26</td>
+                </tr>
+                <tr>
+                  <td>M</td>
+                  <td>6</td>
+                  <td>36 - 37</td>
+                  <td>28 - 29</td>
+                  <td>38 - 40</td>
+                </tr>
+                <tr>
+                  <td>L</td>
+                  <td>8</td>
+                  <td>38 - 29</td>
+                  <td>30 - 31</td>
+                  <td>42 - 44</td>
+                </tr>
+                <tr>
+                  <td>XL</td>
+                  <td>10</td>
+                  <td>40 - 41</td>
+                  <td>32 - 33</td>
+                  <td>45 - 47</td>
+                </tr>
+                <tr>
+                  <td>XXL</td>
+                  <td>12</td>
+                  <td>42 - 43</td>
+                  <td>34 - 35</td>
+                  <td>48 - 50</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+        </div>
+  
+        <!-- Body -->
+        <div class="modal-body">
+  
+          <!-- Header -->
+          <div class="d-flex mb-7">
+  
+            <!-- Heading -->
+            <h5 class="mb-0">Shoes</h5>
+  
+            <!-- Inputs -->
+            <div class="ms-auto">
+  
+              <!-- IN -->
+              <input type="radio" class="btn-check" name="modalSizeChartUnitTwo" id="inTwo" checked="">
+              <label class="btn btn-xxs btn-circle btn-outline-dark fs-xxxs rounded-0" for="inTwo">IN</label>
+  
+              <!-- CM -->
+              <input type="radio" class="btn-check" name="modalSizeChartUnitTwo" id="cmTwo">
+              <label class="btn btn-xxs btn-circle btn-outline-dark fs-xxxs rounded-0" for="cmTwo">CM</label>
+  
+            </div>
+  
+          </div>
+  
+          <!-- Tables -->
+          <div class="row">
+            <div class="col-12 col-lg-6">
+  
+              <!-- Table -->
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm table-hover mb-lg-0">
+                  <thead>
+                    <tr>
+                      <th>Size</th>
+                      <th>US</th>
+                      <th>Foot Length</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>36</td>
+                      <td>5</td>
+                      <td>22.8</td>
+                    </tr>
+                    <tr>
+                      <td>26.5</td>
+                      <td>5.5</td>
+                      <td>23.1</td>
+                    </tr>
+                    <tr>
+                      <td>37</td>
+                      <td>6</td>
+                      <td>23.5</td>
+                    </tr>
+                    <tr>
+                      <td>37.5</td>
+                      <td>6.</td>
+                      <td>23.5</td>
+                    </tr>
+                    <tr>
+                      <td>38</td>
+                      <td>7</td>
+                      <td>24.1</td>
+                    </tr>
+                    <tr>
+                      <td>38.5</td>
+                      <td>7.5</td>
+                      <td>24.5</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+  
+            </div>
+            <div class="col-12 col-lg-6">
+  
+              <!-- Table -->
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th>Size</th>
+                      <th>US</th>
+                      <th>Foot Length</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>36</td>
+                      <td>5</td>
+                      <td>22.8</td>
+                    </tr>
+                    <tr>
+                      <td>39</td>
+                      <td>8</td>
+                      <td>24.1</td>
+                    </tr>
+                    <tr>
+                      <td>40</td>
+                      <td>9</td>
+                      <td>25.4</td>
+                    </tr>
+                    <tr>
+                      <td>40.5</td>
+                      <td>9.5</td>
+                      <td>25.7</td>
+                    </tr>
+                    <tr>
+                      <td>41</td>
+                      <td>10</td>
+                      <td>26.0</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+  
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+</div>
+

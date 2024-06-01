@@ -1,0 +1,371 @@
+<app-navbar></app-navbar>
+<app-bar></app-bar>
+
+<!-- BREADCRUMB -->
+<nav class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+  
+          <!-- Breadcrumb -->
+          <ol class="breadcrumb mb-0 fs-xs text-gray-400">
+            <li class="breadcrumb-item active">
+                <a [routerLink]="['/']">
+                    Inicio
+                </a>
+            </li>
+            <li class="breadcrumb-item active">
+                Checkout
+            </li>
+          </ol>
+  
+        </div>
+      </div>
+    </div>
+</nav>
+
+<section class="pt-7 pb-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+
+          <!-- Heading -->
+          <h3 class="mb-4">Checkout</h3>
+
+          <!-- Subheading -->
+          <p class="mb-10" *ngIf="user == null">
+            Tienes una cuenta? <a class="fw-bold text-reset" [routerLink]="['/login']" routerLinkActive="router-link-active" >Iniciar sesión</a>
+          </p>
+          <p class="mb-10" *ngIf="user != null">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, esse!
+          </p>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-7">
+
+          <!-- Form -->
+          <form>
+
+            <ng-container *ngIf="user == undefined">
+              <h6 class="mb-7">Dirección de Envío</h6>
+
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label class="form-label" for="accountFirstName">
+                      Nombres *
+                    </label>
+                    <input class="form-control form-control-sm" type="text" placeholder="Nombres Completos" required name="nombres" [(ngModel)]="cliente.nombres">
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label class="form-label" for="accountFirstName">
+                      Apellidos *
+                    </label>
+                    <input class="form-control form-control-sm" type="text" placeholder="Apellidos Completos" required name="apellidos" [(ngModel)]="cliente.apellidos">
+                  </div>
+                </div>
+                <div class="col-12 col-md-12">
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label class="form-label" for="accountFirstName">
+                      Correo electrónico *
+                    </label>
+                    <input class="form-control form-control-sm" type="text" placeholder="Correo electrónico" required name="email" [(ngModel)]="cliente.email">
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label class="form-label" for="accountFirstName">
+                      Prefijo *
+                    </label>
+                    <select name="prefijo" [(ngModel)]="direccion.prefijo" class="form-select form-select-sm">
+                      <option value="" selected disabled>Seleccionar</option>
+                      <option value="+51">Perú</option>
+                      <option value="+1">Estados Unidos</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label class="form-label" for="accountFirstName">
+                      Telefono *
+                    </label>
+                    <input class="form-control form-control-sm" type="number" placeholder="Telefono" required name="telefono" [(ngModel)]="direccion.telefono">
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label class="form-label" for="accountFirstName">
+                      País *
+                    </label>
+                    <select name="country" [(ngModel)]="direccion.country" class="form-select form-select-sm">
+                      <option value="" selected disabled>Seleccionar</option>
+                      <option value="Perú">Perú</option>
+                      <option value="Estados Unidos">Estados Unidos</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label class="form-label" for="accountFirstName">
+                      ZIP *
+                    </label>
+                    <input class="form-control form-control-sm" type="text" placeholder="Código Postal" required name="postcode" [(ngModel)]="direccion.postcode">
+                  </div>
+                </div>
+                <div class="col-12 col-md-12">
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label class="form-label" for="accountFirstName">
+                      Dirección *
+                    </label>
+                    <textarea name="address" placeholder="Dirección" [(ngModel)]="direccion.address" class="form-control form-control-sm"></textarea>
+                  </div>
+                </div>
+          
+              </div>
+            </ng-container>
+            <ng-container *ngIf="user != undefined">
+              <h6 class="mb-7">Direcciones Disponibles</h6>
+
+              <div class="row mb-5">
+                  <div class="col-lg-6 col-md-12" *ngFor="let item of direcciones; let idx = index">
+                      <div class="card card-lg bg-white mb-8" [ngClass]="{'direccion-selected': item._id == direccion_selected._id}">
+                          <div class="card-body">
+                        
+                            <!-- Heading -->
+                            <h6 class="mb-6">
+                              Dirección {{idx+1}}
+                            </h6>
+                        
+                            <!-- Text -->
+                            <p class="text-muted mb-0">
+                              {{item.nombres}} {{item.apellidos}} <br>
+                              {{item.address}} <br>
+                              {{item.postcode}} <br>
+                              {{item.country}} <br>
+                              {{item.prefijo}} {{item.telefono}}
+                            </p>
+                        
+                            <!-- Action -->
+                            <div class="card-action card-action-end">
+                              <!-- Button -->
+                              <button class="btn btn-xs btn-circle btn-primary" 
+                              (click)="select_direccion(item)">
+                                <i class="fe fe-check"></i>
+                              </button>
+                        
+                            </div>
+                        
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </ng-container>
+
+            <!-- Heading -->
+            <h6 class="mb-7">Envío</h6>
+
+            <!-- Shipping details -->
+            <div class="table-responsive mb-6">
+              <table class="table table-bordered table-sm table-hover mb-0 bg-white">
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="form-check custom-radio">
+                        <input (change)="setEnvio()" value="8" class="form-check-input" id="checkoutShippingStandard" name="shipping" [(ngModel)]="shipping" type="radio">
+                        <label class="form-check-label text-body text-nowrap" for="checkoutShippingStandard">
+                          Standard Shipping
+                        </label>
+                      </div>
+                    </td>
+                    <td>Entrega en 5 - 7 días laborables</td>
+                    <td>$8.00</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-check custom-radio">
+                        <input (change)="setEnvio()" value="12" class="form-check-input" id="checkoutShippingExpress" name="shipping" [(ngModel)]="shipping" type="radio">
+                        <label class="form-check-label text-body text-nowrap" for="checkoutShippingExpress">
+                          Express Shipping
+                        </label>
+                      </div>
+                    </td>
+                    <td>Entrega en 3 - 5 días laborables</td>
+                    <td>$12.00</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-check custom-radio">
+                        <input (change)="setEnvio()" value="18" class="form-check-input" id="checkoutShippingShort" name="shipping" [(ngModel)]="shipping" type="radio">
+                        <label class="form-check-label text-body text-nowrap" for="checkoutShippingShort">
+                          1 - 2 Shipping
+                        </label>
+                      </div>
+                    </td>
+                    <td>Entrega en 1 - 2 días laborables</td>
+                    <td>$18.00</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-check custom-radio">
+                        <input (change)="setEnvio()" value="0" class="form-check-input" id="checkoutShippingFree" name="shipping" [(ngModel)]="shipping" type="radio">
+                        <label class="form-check-label text-body text-nowrap" for="checkoutShippingFree">
+                          Free Shipping
+                        </label>
+                      </div>
+                    </td>
+                    <td>Entrega en 30 - 60 días laborables</td>
+                    <td>$0.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+
+
+            <!-- Notes -->
+            <textarea class="form-control form-control-sm mb-9 mb-md-0 fs-xs" rows="5" 
+            placeholder="Order Notes (optional)" name="nota" [(ngModel)]="venta.nota"></textarea>
+
+          </form>
+
+        </div>
+        <div class="col-12 col-md-5 col-lg-4 offset-lg-1">
+
+          <!-- Heading -->
+          <h6 class="mb-7">Productos ({{cart.length}})</h6>
+
+          <!-- Divider -->
+          <hr class="my-7">
+
+
+          <div class="card-products" style="max-height: 340px;
+          overflow-y: auto;
+          overflow-x: hidden;
+          margin-bottom: 3rem;
+          scrollbar-width: thin;">
+
+              <ng-container *ngIf="!load_cart">
+                <!-- List group -->
+                <ul class="list-group list-group-lg list-group-flush-y list-group-flush-x">
+                  <li class="list-group-item" *ngFor="let item of cart" style="padding: 1rem !important;">
+                    <div class="row align-items-center">
+                      <div class="col-4">
+
+                        <!-- Image -->
+                        <a [routerLink]="['/'+item.producto.slug]">
+                          <img *ngIf="user != null" [src]="url+'/getProductoPortada/'+item.producto.portada" alt="..." class="img-fluid">
+                          <img *ngIf="user == null"  class="img-fluid" [src]="url+'/getProductoPortada/'+item.portada" alt="...">
+                        </a>
+
+                      </div>
+                      <div class="col-8">
+
+                        <!-- Title -->
+                        <p class="mb-4 fs-sm fw-bold">
+                          <a style="font-size: .8rem;" *ngIf="user != null"  class="text-body" [routerLink]="['/'+item.producto.slug]">
+                            {{item.producto.titulo.substring(0,15)}}...
+                          </a> 
+                          <a style="font-size: .8rem;" *ngIf="user == null"  class="text-body" [routerLink]="['/'+item.slug]">
+                            {{item.titulo}}
+                          </a> 
+                          <br>
+                          <span class="text-muted">
+                            <ng-container *ngIf="user != null">{{item.producto_variedad.precio|currency:'USD'}}</ng-container>
+                            <ng-container *ngIf="user == null">{{item.precio|currency:'USD'}}</ng-container>
+                          </span>
+                        </p>
+
+                        <!-- Text -->
+                        <p class="fs-sm text-muted"  *ngIf="user != null">
+                          Talla: {{item.producto_variedad.talla}} <br>
+                          Color: {{item.producto_variedad.color}} <br>
+                          Cantidad: {{item.cantidad}}
+                        </p>
+                        <p class="fs-sm text-muted"  *ngIf="user == null">
+                          Talla: {{item.talla}} <br>
+                          Color: {{item.color}} <br>
+                          Cantidad: {{item.cantidad}}
+                        </p>
+
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </ng-container>
+              <ng-container *ngIf="load_cart">
+                <div class="text-center py-10">
+                  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              </ng-container>
+            
+          </div>
+
+          <!-- Card -->
+          <div class="card mb-9 bg-white">
+            <div class="card-body">
+              <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
+                <li class="list-group-item d-flex">
+                  <span>Subtotal</span> <span class="ms-auto fs-sm">{{subtotal|currency:'USD'}}</span>
+                </li>
+                <li class="list-group-item d-flex">
+                  <span>Envío</span> <span class="ms-auto fs-sm">{{shipping|currency:'USD'}}</span>
+                </li>
+                <li class="list-group-item d-flex">
+                  <span>Descuento</span> <span class="ms-auto fs-sm text-danger">-{{descuento|currency:'USD'}}</span>
+                </li>
+                <li class="list-group-item d-flex fs-lg fw-bold">
+                  <span>Total</span> <span class="ms-auto">{{total|currency:'USD'}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row mb-9">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Aplicar Cupón" name="codigo" [(ngModel)]="codigo">
+              </div>
+              <div class="col-auto">
+                <button class="btn btn-dark" (click)="aplicarCupon()">Aplicar</button>
+              </div>
+              <div class="col-12" *ngIf="msm_cupon">
+                <small class="text-danger">{{msm_cupon}}</small>
+              </div>
+          </div>
+
+          <!-- Disclaimer -->
+          <p class="mb-7 fs-xs text-gray-500">
+            Your personal data will be used to process your order, support
+            your experience throughout this website, and for other purposes
+            described in our privacy policy.
+          </p>
+
+          <!-- Button -->
+          <div id="paypal-button-container">
+
+          </div>
+
+          <div class="text-center" *ngIf="msm_error_venta">
+            <span class="text-danger">{{msm_error_venta}}</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+<app-footer></app-footer>

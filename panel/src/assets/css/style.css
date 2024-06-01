@@ -1,0 +1,14 @@
+#kt_aside_logo{
+    border-bottom: 1px dashed #393945 !important;
+}
+
+.menu-title{
+    color: #dbdfe9 !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+}
+
+.aside-dark .menu .menu-item .menu-link .menu-icon .svg-icon svg [fill]:not(.permanent):not(g) {
+    transition: fill .3s ease;
+    fill: #cfcfd1 !important;
+}

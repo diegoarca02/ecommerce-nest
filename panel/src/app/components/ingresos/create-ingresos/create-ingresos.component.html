@@ -1,0 +1,317 @@
+
+<div class="d-flex flex-column flex-root">
+    <!--begin::Page-->
+    <div class="page d-flex flex-row flex-column-fluid">
+        <!--begin::Aside-->
+        <app-sidebar></app-sidebar>
+        <!--end::Aside-->
+        <!--begin::Wrapper-->
+        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+            <!--begin::Header-->
+            <app-topbar></app-topbar>
+            <!--end::Header-->
+            <!--begin::Content-->
+            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                <!--begin::Toolbar-->
+                <div class="toolbar" id="kt_toolbar">
+                    <!--begin::Container-->
+                    <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+                        <!--begin::Page title-->
+                        <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                            <!--begin::Title-->
+                            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Dashboard
+                            <!--begin::Separator-->
+                            <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
+                            <!--end::Separator-->
+                            <!--begin::Description-->
+                            <ol class="breadcrumb text-muted fs-6 fw-semibold">
+                                <li class="breadcrumb-item pe-3">Usuarios</li>
+                            </ol>
+                            <!--end::Description--></h1>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Page title-->
+                        <!--begin::Actions-->
+                        <div class="d-flex align-items-center py-1">
+                            
+                            <a href="#" class="btn btn-sm btn-primary">
+                                Create</a>
+                            <!--end::Button-->
+                        </div>
+                        <!--end::Actions-->
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Toolbar-->
+                <!--begin::Post-->
+                <div class="post d-flex flex-column-fluid" id="kt_post">
+                    <!--begin::Container-->
+                    <div id="kt_content_container" class="container-xxl">
+                        
+                        <div class="row gy-5 g-xl-8">
+                            <div class="col-12">
+                                <div class="card mb-10">
+                                    <!--begin::Card header-->
+                                    <div class="card-header py-7" style="border-bottom: 0px;    padding-bottom: 10px !important;">
+                                        <h3 class="card-title align-items-start flex-column">
+                                            <span class="card-label text-gray-800 fw-700">Nuevo ingreso</span>
+                                            <span class="text-gray-400 mt-1 fw-semibold fs-6 d-none d-sm-block">
+                                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, laboriosam.
+                                            </span>
+                                        </h3>
+                                        <!--end::Title-->
+                                
+                                        <!--begin::Create campaign button-->
+                                        <div class="card-toolbar d-none d-sm-block">
+                                           <button *ngIf="!btn_load" class="btn btn-dark" (click)="guardar()">Guardar</button>
+                                           <button *ngIf="btn_load" class="btn btn-dark" type="button" disabled>
+                                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                            Procensando...
+                                        </button>
+                                        </div>
+                                        <!--end::Create campaign button-->
+                                    </div>
+                                    <!--end::Card header-->
+                                   
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-4">
+                                        <div class="d-flex flex-stack">
+                                            <div class="d-flex">
+                                                <div class="d-flex flex-column">
+                                                    <a href="#" class="fs-5 text-dark text-hover-primary fw-bold">
+                                                        Proveedor
+                                                    </a>
+                                                    <div class="fs-6 fw-semibold text-gray-400">
+                                                        Lorem ipsum dolor sit amet.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                               <select name="proveedor" [(ngModel)]="ingreso.proveedor" class="form-select">
+                                                    <option value="" selected disabled>Seleccionar</option>
+                                                    <option [value]="item" *ngFor="let item of proveedores">{{item}}</option>
+                                               </select>
+                                            </div>
+                                        </div>
+                                        <div class="separator separator-dashed my-5"></div>
+                                        <div class="d-flex flex-stack">
+                                            <div class="d-flex">
+                                                <div class="d-flex flex-column">
+                                                    <a href="#" class="fs-5 text-dark text-hover-primary fw-bold">
+                                                        Almacen
+                                                    </a>
+                                                    <div class="fs-6 fw-semibold text-gray-400">
+                                                        Lorem ipsum dolor sit amet.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                               <select name="almacen" [(ngModel)]="ingreso.almacen" class="form-select">
+                                                    <option value="" selected disabled>Seleccionar</option>
+                                                    <option [value]="item" *ngFor="let item of almacenes">{{item}}</option>
+                                               </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+                                
+                                <div class="card">
+                                    <div class="card-header py-7" style="border-bottom: 0px;    padding-bottom: 10px !important;">
+                                        <h3 class="card-title align-items-start flex-column">
+                                            <span class="card-label text-gray-800 fw-700">Detalles de ingreso</span>
+                                            <span class="text-gray-400 mt-1 fw-semibold fs-6 d-none d-sm-block">
+                                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, laboriosam.
+                                            </span>
+                                        </h3>
+                                        <!--end::Title-->
+                                
+                                        <!--begin::Create campaign button-->
+                                        <div class="card-toolbar d-none d-sm-block">
+                                           
+                                        </div>
+                                        <!--end::Create campaign button-->
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <input id="str_producto" type="text" class="form-control cursor-pointer" placeholder="Producto" readonly data-bs-toggle="modal" [attr.data-bs-target]="'#modalProducto'">
+                                            </div>
+                                            <div class="col">
+                                                <select name="producto_variedad" [(ngModel)]="detalle.producto_variedad"  class="form-select" (change)="select_variacion()">
+                                                    <option value="" selected disabled>Seleccionar</option>
+                                                    <option [value]="item._id" *ngFor="let item of variaciones">{{item.color}} {{item.talla}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <input type="number" class="form-control" placeholder="Precio unidad" name="precio_unidad" [(ngModel)]="detalle.precio_unidad">
+                                            </div>
+                                            <div class="col">
+                                                <input type="number" class="form-control" placeholder="Cantidad" name="cantidad" [(ngModel)]="detalle.cantidad">
+                                            </div>
+                                            <div class="col-12 mb-10" style="margin-top: 1rem;">
+                                                <div class="d-flex justify-content-between ">
+                                                    <a class="text-primary cursor-pointer" (click)="agregar_detalle()">Agregar detalle</a>
+
+                                                    <small *ngIf="msm_error_detalle" class="text-danger">{{msm_error_detalle}}</small>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="table-responsive">
+                                                    <table class="table align-middle table-row-dashed fs-6 gy-3 dataTable no-footer" id="kt_table_widget_5_table">
+                                                
+                                                        <!--begin::Table body-->
+                                                        <tbody class="fw-bold text-gray-600">
+                                                            <tr class="odd" *ngFor="let item of detalles; let idx = index">
+                                                                <!--begin::Item-->
+                                                                <td>
+                                                                    <a href="/metronic8/demo1/../demo1/apps/ecommerce/catalog/edit-product.html" class="text-dark text-hover-primary">
+                                                                        {{item.producto_titulo}}
+                                                                    </a>
+                                                                    <br>
+                                                                    <small class="text-primary">
+                                                                        {{item.color}} {{item.talla}}
+                                                                    </small>
+                                                                </td>
+                                                                <!--end::Item-->
+                                                
+                                                                <!--begin::Product ID-->
+                                                                <td class="text-end">
+                                                                    {{item.cantidad}}   
+                                                                    <small>unids.</small>                  
+                                                                </td>
+                                                                <!--end::Product ID-->
+                                                
+                                                                <!--begin::Date added-->
+                                                                <td class="text-end">
+                                                                    {{item.precio_unidad|currency}}   
+                                                                    <small>x unid</small>                        
+                                                                </td>
+                                                                <!--end::Date added-->
+                                                
+                                                                <!--begin::Price-->
+                                                                <td class="text-end">
+                                                                    {{item.cantidad*item.precio_unidad|currency}}                 
+                                                                </td>
+                                                                <!--end::Price-->
+                                                                <td class="text-end">
+                                                                    <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary w-30px h-30px" (click)="quitar_detalle(idx)">
+                                                                        <span class="svg-icon svg-icon-muted svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"/>
+                                                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"/>
+                                                                            </svg>
+                                                                            
+                                                                        </span>
+                                                                    </button>
+                                                                </td>
+                                                                                   
+                                                            </tr>
+                                                        </tbody>
+                                                        <!--end::Table body-->
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Post-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+</div>
+
+
+<div class="modal fade" id="modalProducto" tabindex="-1" style="display: none;" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content rounded">
+            <!--begin::Modal header-->
+            <div class="modal-header pb-0 border-0 justify-content-end">
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <span class="svg-icon svg-icon-muted svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"/>
+                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"/>
+                        </svg>
+                        
+                    </span>            
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--begin::Modal header-->
+
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                <!--begin:Form-->
+                <form id="kt_modal_new_target_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#">
+                    <!--begin::Heading-->
+                    <div class="mb-13 text-center">
+                        <!--begin::Title-->
+                        <h1 class="mb-3">Productos</h1>
+                        <!--end::Title-->
+
+                        <!--begin::Description-->
+                        <div class="text-muted fw-semibold fs-5">
+                            If you need more info, please check <a class="fw-bold link-primary">Project Guidelines</a>.
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Heading-->
+
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                        <input type="text" class="form-control form-control-solid" placeholder="Busca tu producto" name="filtro_producto" [(ngModel)]="filtro_producto" (keyup.ENTER)="init_producto()">
+                    </div>
+                    <!--end::Input group-->
+
+                    <div class="mh-375px scroll-y me-n7 pe-7">
+                        <!--begin::User-->
+                        <ng-container *ngFor="let item of productos">
+                            <a class="d-flex align-items-center p-3 rounded bg-state-light bg-state-opacity-50 mb-1"  (click)="select_producto(item)">
+                                <!--begin::Avatar-->
+                                <div class="symbol symbol-35px symbol-circle me-5">
+                                    <img alt="Pic" [src]="url+'/getProductoPortada/'+item.portada">
+                                </div>
+                                <!--end::Avatar-->
+                            
+                                <!--begin::Info-->
+                                <div class="fw-semibold">
+                                <span class="fs-6 text-gray-800 me-2">
+                                    {{item.titulo}}
+                                </span>
+                                <br>
+                                <code>
+                                    {{item.categoria.titulo}}
+                                    -
+                                    {{item.subcategoria}}
+                                </code>
+                                </div>
+                                <!--end::Info-->
+                            </a>
+                        </ng-container>
+                        <!--end::User-->
+                     
+                    <!--end::User-->
+                    </div>
+
+                </form>
+                <!--end:Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+

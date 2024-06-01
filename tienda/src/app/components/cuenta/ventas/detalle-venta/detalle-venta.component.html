@@ -1,0 +1,195 @@
+<ng-container *ngIf="!load_data">
+  <!-- Order -->
+  <div class="card card-lg mb-5 border">
+    <div class="card-body pb-0">
+
+      <!-- Info -->
+      <div class="card card-sm">
+        <div class="card-body bg-light">
+          <div class="row">
+            <div class="col-6 col-lg-3">
+
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Order No:</h6>
+
+              <!-- Text -->
+              <p class="mb-lg-0 fs-sm fw-bold">
+                {{venta._id?.substring(12,50)}}
+              </p>
+
+            </div>
+            <div class="col-6 col-lg-3">
+
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Fecha:</h6>
+
+              <!-- Text -->
+              <p class="mb-lg-0 fs-sm fw-bold">
+                <time datetime="2019-10-01">
+                  {{venta.createdAt|date}}
+                </time>
+              </p>
+
+            </div>
+            <div class="col-6 col-lg-3">
+
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Estado:</h6>
+
+              <!-- Text -->
+              <p class="mb-0 fs-sm fw-bold">
+                {{venta.estado}}
+              </p>
+
+            </div>
+            <div class="col-6 col-lg-3">
+
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Total:</h6>
+
+              <!-- Text -->
+              <p class="mb-0 fs-sm fw-bold">
+                {{venta.total|currency:'USD'}}
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="card-footer">
+
+      <!-- Heading -->
+      <h6 class="mb-7">Productos ({{detalles.length}})</h6>
+
+      <!-- Divider -->
+      <hr class="my-5">
+
+      <!-- List group -->
+      <ul class="list-group list-group-lg list-group-flush-y list-group-flush-x">
+        <li class="list-group-item" *ngFor="let item of detalles">
+          <div class="row align-items-center">
+            <div class="col-4 col-md-3 col-xl-2">
+
+              <!-- Image -->
+              <a [routerLink]="['/',item.producto.slug]">
+                <img [src]="url+'/getProductoPortada/'+item.producto.portada" alt="..." class="img-fluid">
+              </a>
+
+            </div>
+            <div class="col">
+
+              <!-- Title -->
+              <p class="mb-4 fs-sm fw-bold">
+                <a class="text-body" [routerLink]="['/',item.producto.slug]" >
+                  {{item.producto.titulo}}
+                </a> 
+                  <br>
+                <span class="text-muted">
+                  {{item.precio*item.cantidad|currency:'USD'}}
+                  &nbsp; | &nbsp; {{item.cantidad}} cant
+                </span>
+              </p>
+
+              <!-- Text -->
+              <div class="fs-sm text-muted">
+                Talla: {{item.producto_variedad.talla}} <br>
+                Color: {{item.producto_variedad.color}}
+              </div>
+
+            </div>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- Total -->
+  <div class="card card-lg mb-5 border">
+    <div class="card-body">
+
+      <!-- Heading -->
+      <h6 class="mb-7">Total de Orden</h6>
+
+      <!-- List group -->
+      <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
+        <li class="list-group-item d-flex">
+          <span>Subtotal</span>
+          <span class="ms-auto">{{subtotal|currency:'USD'}}</span>
+        </li>
+        <li class="list-group-item d-flex">
+          <span>Descuento</span>
+          <span class="ms-auto text-danger">-{{venta.descuento|currency:'USD'}}</span>
+        </li>
+        <li class="list-group-item d-flex">
+          <span>Envío</span>
+          <span class="ms-auto">{{venta.envio|currency:'USD'}}</span>
+        </li>
+        <li class="list-group-item d-flex fs-lg fw-bold">
+          <span>Total</span>
+          <span class="ms-auto">{{venta.total|currency:'USD'}}</span>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- Details -->
+  <div class="card card-lg border">
+    <div class="card-body">
+
+      <!-- Heading -->
+      <h6 class="mb-7">Dirección de Envío</h6>
+
+      <!-- Content -->
+      <div class="row">
+        <div class="col-12 col-md-6">
+
+          <!-- Heading -->
+          <p class="mb-4 fw-bold">
+            Dirección:
+          </p>
+
+          <p class="mb-7 mb-md-0 text-gray-500">
+            {{venta.direccion.nombres}} {{venta.direccion.apellidos}}, <br>
+            {{venta.direccion.address}},
+          </p>
+
+        </div>
+        <div class="col-12 col-md-6">
+
+          <!-- Heading -->
+          <p class="mb-4 fw-bold">
+            Shipping Method:
+          </p>
+
+          <p class="mb-7 text-gray-500">
+            {{venta.tipo_envio}} <br>
+            {{venta.fecha_entrega|date}} entrega 
+          </p>
+
+          <!-- Heading -->
+          <p class="mb-4 fw-bold">
+            Método de Pago:
+          </p>
+
+          <p class="mb-0 text-gray-500">
+            Paypal - {{venta.paymentID}}
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="load_data">
+  <div class="text-center py-10">
+    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-container>

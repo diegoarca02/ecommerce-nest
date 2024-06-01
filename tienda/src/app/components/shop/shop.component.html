@@ -1,0 +1,330 @@
+<app-navbar></app-navbar>
+<app-bar></app-bar>
+
+
+  <!-- BREADCRUMB -->
+  <nav class="my-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+  
+          <!-- Breadcrumb -->
+          <ol class="breadcrumb mb-0 fs-xs text-gray-400">
+            <li class="breadcrumb-item">
+              <a class="text-reset" [routerLink]="['/']">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">
+              <span style="color: black;text-transform: uppercase;letter-spacing: 1px;font-weight: 500;">Tienda</span>
+            </li>
+          </ol>
+  
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- CONTENT -->
+  <section class="pt-7 pb-12">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-12">
+  
+          <!-- Filters -->
+          <div class="btn-group-justified btn-group-expand-lg mb-10" role="group">
+            <div class="btn-group dropdown">
+  
+              <!-- Toggle -->
+              <button class="btn btn-sm w-100 btn-outline-border dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" data-bs-auto-close="outside">
+                Orden:
+                <small>{{sort}}</small>
+              </button>
+  
+              <!-- Menu -->
+              <form class="dropdown-menu">
+                <div class="card">
+                  <div class="card-body">
+  
+                    <!-- Form group -->
+                    <div class="form-group-overflow">
+                      <div style="cursor: pointer !important;" class="mb-3" (click)="setSort('Default')">
+                        <label class="form-check-label" [ngClass]="{'element-active': sort == 'Default'}">Default</label>
+                      </div>
+                      <div style="cursor: pointer !important;" class="mb-3" (click)="setSort('Precio menor')">
+                        <label class="form-check-label" [ngClass]="{'element-active': sort == 'Precio menor'}">Precio menor</label>
+                      </div>
+                      <div style="cursor: pointer !important;" class="mb-3" (click)="setSort('Precio mayor')">
+                        <label class="form-check-label" [ngClass]="{'element-active': sort == 'Precio mayor'}">Precio mayor</label>
+                      </div>
+                      <div style="cursor: pointer !important;" class="mb-3" (click)="setSort('A-Z')">
+                        <label class="form-check-label" [ngClass]="{'element-active': sort == 'A-Z'}">A-Z</label>
+                      </div>
+                      <div style="cursor: pointer !important;" class="" (click)="setSort('Z-A')">
+                        <label class="form-check-label" [ngClass]="{'element-active': sort == 'Z-A'}" >Z-A</label>
+                      </div>
+                    </div>
+  
+                  </div>
+                </div>
+              </form>
+  
+            </div>
+            <div class="btn-group dropdown">
+  
+              <!-- Toggle -->
+              <button class="btn btn-sm w-100 btn-outline-border dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" data-bs-auto-close="outside">
+                Genero:
+                <small>{{genero}}</small>
+              </button>
+  
+              <!-- Menu -->
+              <form class="dropdown-menu">
+                <div class="card">
+                  <div class="card-body">
+  
+                    <!-- Form group -->
+                    <div class="form-group-overflow">
+                      <div style="cursor: pointer !important;" class=" mb-3" (click)="setFiltro('Genero','Todos')">
+                        <label class="form-check-label cursor-pointer" [ngClass]="{'element-active': genero == 'Todos'}" >Todos</label>
+                      </div>
+                      <div style="cursor: pointer !important;" class=" mb-3" (click)="setFiltro('Genero','Femenino')">
+                        <label class="form-check-label cursor-pointer" [ngClass]="{'element-active': genero == 'Femenino'}">Femenino</label>
+                      </div>
+                      <div style="cursor: pointer !important;" class=" mb-3" (click)="setFiltro('Genero','Masculino')">
+                        <label class="form-check-label cursor-pointer" [ngClass]="{'element-active': genero == 'Masculino'}">Masculino</label>
+                      </div>
+                      <div style="cursor: pointer !important;" class=" mb-3" (click)="setFiltro('Genero','Niñas')">
+                        <label class="form-check-label cursor-pointer" [ngClass]="{'element-active': genero == 'Niñas'}">Niñas</label>
+                      </div>
+                      <div style="cursor: pointer !important;" class="" (click)="setFiltro('Genero','Niños')">
+                        <label class="form-check-label cursor-pointer" [ngClass]="{'element-active': genero == 'Niños'}" >Niños</label>
+                      </div>
+                    </div>
+  
+                  </div>
+                </div>
+              </form>
+  
+            </div>
+            <div class="btn-group dropdown">
+  
+              <!-- Toggle -->
+              <button class="btn btn-sm w-100 btn-outline-border dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" data-bs-auto-close="outside">
+                Categorías:
+                <small>({{query_categorias.length}})</small>
+              </button>
+  
+              <!-- Menu -->
+              <form class="dropdown-menu">
+                <div class="card">
+                  <div class="card-body">
+  
+                    <!-- Form group -->
+                    <div class="form-group-overflow" *ngIf="categorias.length >= 1">
+                      <div class="form-check mb-3" *ngFor="let item of categorias;let idx = index">
+                        <input (change)="toggleSelection($event,idx)" class="form-check-input" id="categoryOne" [checked]="item.selected" name="category" type="checkbox" value="All Products">
+                        <label class="form-check-label" for="categoryOne">
+                          {{item.titulo}}
+                        </label>
+                      </div>
+                    </div>
+  
+                    <small class="text-muted" *ngIf="categorias.length == 0">
+                      Seleccione un genero.
+                    </small>
+                  </div>
+                  <div class="card-footer d-flex flex-nowrap border-top">
+                    <button style="width: 100% !important;" class="btn btn-dark btn-sm ms-2" type="button" (click)="setCategorias()">
+                      Aplicar
+                    </button>
+  
+                  </div>
+                </div>
+              </form>
+  
+            </div>
+            <div class="btn-group dropdown">
+  
+              <!-- Toggle -->
+              <button class="btn btn-sm w-100 btn-outline-border dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" data-bs-auto-close="outside">
+                Precio: 
+                <small>{{precio}}</small>
+              </button>
+  
+              <!-- Menu -->
+              <form class="dropdown-menu">
+                <div class="card">
+                  <div class="card-body">
+  
+                    <!-- Form group -->
+                    <div class="form-group-overflow">
+                      <div class="form-check mb-3">
+                        <input class="form-check-input chk-precio" id="priceOne" (change)="selectPrecio($event)" type="checkbox" value="$10.00 - $49.00">
+                        <label class="form-check-label" for="priceOne">
+                          $10.00 - $49.00
+                        </label>
+                      </div>
+                      <div class="form-check mb-3">
+                        <input class="form-check-input chk-precio" id="priceTwo" (change)="selectPrecio($event)" type="checkbox" value="$50.00 - $99.00">
+                        <label class="form-check-label" for="priceTwo">
+                          $50.00 - $99.00
+                        </label>
+                      </div>
+                      <div class="form-check mb-3">
+                        <input class="form-check-input chk-precio" id="priceThree" (change)="selectPrecio($event)" type="checkbox" value="$100.00 - $199.00">
+                        <label class="form-check-label" for="priceThree">
+                          $100.00 - $199.00
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input chk-precio" id="priceFour" (change)="selectPrecio($event)" type="checkbox" value="$200.00 a más">
+                        <label class="form-check-label" for="priceFour">
+                          $200.00 a más
+                        </label>
+                      </div>
+                    </div>
+  
+                  </div>
+                  <div class="card-footer d-flex flex-nowrap border-top">
+  
+                    <button style="width: 100% !important;" class="btn btn-dark btn-sm ms-2" type="button" (click)="setFiltro('Precio',true)">
+                      Aplicar
+                    </button>
+  
+                  </div>
+                </div>
+              </form>
+  
+            </div>
+          </div>
+  
+        </div>
+      </div>
+      <div class="row">
+        <ng-container *ngIf="load_producto">
+          <div class="text-center py-10">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!load_producto">
+          <div class="col-6 col-sm-6 col-md-4 col-lg-3" *ngFor="let item of productos| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+            <!-- Card -->
+            <a [routerLink]="['/',item.slug]">
+              <div class="card mb-7" data-toggle="card-collapse" style="background-color: transparent;">
+    
+                <!-- Badge -->
+                <div class="badge bg-dark text-white card-badge card-badge-start text-uppercase">
+                  {{item.etiqueta}}
+                </div>
+      
+                <!-- Image -->
+                <div class="card-img" data-flickity='{"draggable": false}' id="productOneImg">
+                  <a class="d-block w-100" href="product.html">
+                    <img class="card-img-top" [src]="url+'/getImgProductos/'+item.portada" alt="..." />
+                  </a>
+                </div>
+      
+                <!-- Collapse -->
+                <div class="card-collapse-parent">
+      
+                  <!-- Body -->
+                  <div class="card-body px-0 pb-0">
+                    <div class="row gx-0">
+                      <div class="col-12">
+      
+                        <!-- Title -->
+                        <a class="d-block fw-bold text-body" href="product.html" style="    white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;">
+                          {{item.titulo}}
+                        </a>
+      
+                        <!-- Category -->
+                        <code style="color: #646060;
+                        font-size: .8rem !important;
+                        ">
+                          {{item.clasificacion}} - {{item.categoria.titulo}}
+                        </code>
+      
+                      </div>
+                      <div class="col-12">
+                        <!-- Price -->
+                        <div class="fs-7 fw-bold">
+                          <!-- <del class="text-danger me-3">{{10.0|currency:'USD'}}</del> -->
+                          <span class="text-dark" style="font-weight: 900 !important;">
+                            {{item.precio|currency:'USD'}}
+                          </span>
+                        </div>
+      
+                      </div>
+                    </div>
+                  </div>
+      
+                  <!-- Footer -->
+                  <div class="card-collapse collapse">
+                    <div class="card-footer px-0 bg-white">
+                      <form>
+                        <div class="mb-1">
+                          <div class="form-check form-check-inline form-check-color">
+                            <input type="radio" id="productOneColorOne" name="productOneColor" class="form-check-input" data-toggle="flickity" data-target="#productOneImg" data-slide="0" style="background-color: beige" checked />
+                          </div>
+                          <div class="form-check form-check-inline form-check-color ms-n2">
+                            <input type="radio" id="productOneColorTwo" name="productOneColor" class="form-check-input" data-toggle="flickity" data-target="#productOneImg" data-slide="1" style="background-color: black" />
+                          </div>
+                        </div>
+                        <div>
+                          <div class="form-check form-check-inline form-check-text fs-xs">
+                            <input type="radio" id="productOneSizeOne" name="sizeRadio" class="form-check-input" />
+                            <label class="form-check-label" for="productOneSizeOne">6</label>
+                          </div>
+                          <div class="form-check form-check-inline form-check-text fs-xs">
+                            <input type="radio" id="productOneSizeTwo" name="sizeRadio" class="form-check-input" />
+                            <label class="form-check-label" for="productOneSizeTwo">6.5</label>
+                          </div>
+                          <div class="form-check form-check-inline form-check-text fs-xs">
+                            <input type="radio" id="productOneSizeThree" name="sizeRadio" class="form-check-input" />
+                            <label class="form-check-label" for="productOneSizeThree">7</label>
+                          </div>
+                          <div class="form-check form-check-inline form-check-text fs-xs">
+                            <input type="radio" id="productOneSizeFour" name="sizeRadio" class="form-check-input" />
+                            <label class="form-check-label" for="productOneSizeFour">7.5</label>
+                          </div>
+                          <div class="form-check form-check-inline form-check-text fs-xs">
+                            <input type="radio" id="productOneSizeFive" name="sizeRadio" class="form-check-input" />
+                            <label class="form-check-label" for="productOneSizeFive">8.5</label>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+      
+                </div>
+      
+              </div>
+            </a>
+    
+          </div>
+
+          <div class="col-12">
+  
+            <ngb-pagination
+                [collectionSize]="productos.length"
+                [(page)]="page"
+                [pageSize]="pageSize"
+                [maxSize]="5"
+                [rotate]="true"
+                [ellipses]="false"
+                [boundaryLinks]="true"
+            ></ngb-pagination>
+    
+          </div>
+        </ng-container>
+        
+      </div>
+     
+    </div>
+  </section>
+
+<app-footer></app-footer>

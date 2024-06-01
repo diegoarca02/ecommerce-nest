@@ -1,0 +1,58 @@
+<div class="d-flex flex-column flex-lg-row-fluid p-10 order-2 order-lg-1" style="height: 100vh !important;">
+    <!--begin::Form-->
+    <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+        <!--begin::Wrapper-->
+        <div class="card card-flush w-md-500px py-5">
+            <div class="card-body pt-15 pb-5">
+                <!--begin::Heading-->
+                <div class="text-center mb-11">
+                    <!--begin::Title-->
+                    <h1 class="text-dark fw-700 mb-3">
+                        Panel Administrador
+                    </h1>
+                    <!--end::Title-->
+
+                    <!--begin::Subtitle-->
+                    <div class="text-gray-500 fw-semibold fs-6">
+                        Your Social Campaigns
+                    </div>
+                    <!--end::Subtitle--->
+                </div>
+                <!--begin::Heading-->
+
+                <!--begin::Input group--->
+                <div class="fv-row mb-8 fv-plugins-icon-container">
+                    <!--begin::Email-->
+                    <input type="text" (keyup.ENTER)="login()" placeholder="Email" name="email" autocomplete="off" class="form-control form-control-solid" [(ngModel)]="usuario.email"/> 
+                    <!--end::Email-->
+                <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
+
+                <!--end::Input group--->
+                <div class="fv-row mb-8 fv-plugins-icon-container">    
+                    <!--begin::Password-->
+                    <input type="password" (keyup.ENTER)="login()" placeholder="Password" name="password" autocomplete="off" class="form-control form-control-solid" [(ngModel)]="usuario.password"/>
+                    <!--end::Password-->
+                </div>
+                <!--end::Input group--->
+
+
+
+                <!--begin::Submit button-->
+                <div class="d-grid mb-10">
+                    <button *ngIf="!load_btn" type="button" class="btn btn-dark" (click)="login()">
+                        Iniciar sesión
+                    </button>
+                    <button *ngIf="load_btn" class="btn btn-dark" type="button" disabled>
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        Procensando...
+                    </button>
+                </div>
+            </div>
+            <!--end::Submit button-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Form-->       
+
+
+</div>

@@ -1,0 +1,111 @@
+<div class="card card-lg mb-5 border" *ngFor="let item of ventas">
+    <div class="card-body pb-0">
+  
+      <!-- Info -->
+      <div class="card card-sm">
+        <div class="card-body bg-light">
+          <div class="row">
+            <div class="col-6 col-lg-3">
+  
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Order No:</h6>
+  
+              <!-- Text -->
+              <p class="mb-lg-0 fs-sm fw-bold">
+                {{item.venta._id.substring(12,50)}}
+              </p>
+  
+            </div>
+            <div class="col-6 col-lg-3">
+  
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Fecha:</h6>
+  
+              <!-- Text -->
+              <p class="mb-lg-0 fs-sm fw-bold">
+                <time datetime="2019-10-01">
+                  {{item.venta.createdAt|date}}
+                </time>
+              </p>
+  
+            </div>
+            <div class="col-6 col-lg-3">
+  
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Estado:</h6>
+  
+              <!-- Text -->
+              <p class="mb-0 fs-sm fw-bold">
+                {{item.venta.estado}}
+              </p>
+  
+            </div>
+            <div class="col-6 col-lg-3">
+  
+              <!-- Heading -->
+              <h6 class="heading-xxxs text-muted">Total:</h6>
+  
+              <!-- Text -->
+              <p class="mb-0 fs-sm fw-bold">
+                {{item.venta.total|currency:'USD'}}
+              </p>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    <div class="card-footer">
+      <div class="row align-items-center">
+        <div class="col-12 col-lg-6">
+          <div class="row gx-5 mb-4 mb-lg-0">
+            <div class="col-3" *ngIf="item.detalles[0]">
+  
+              <!-- Image -->
+              <div class="ratio ratio-1x1 bg-cover" style="background-image: url({{url}}/getProductoPortada/{{item.detalles[0].producto.portada}});"></div>
+  
+            </div>
+            <div class="col-3" *ngIf="item.detalles[1]">
+  
+                <!-- Image -->
+                <div class="ratio ratio-1x1 bg-cover" style="background-image: url({{url}}/getProductoPortada/{{item.detalles[1].producto.portada}});"></div>
+    
+            </div>
+            <div class="col-3" *ngIf="item.detalles[2]">
+  
+                <!-- Image -->
+                <div class="ratio ratio-1x1 bg-cover" style="background-image: url({{url}}/getProductoPortada/{{item.detalles[2].producto.portada}});"></div>
+    
+            </div>
+            
+            <div class="col-3" *ngIf="item.detalles.length >= 4">
+  
+              <!-- Image -->
+              <div class="ratio ratio-1x1 bg-light">
+                <a class="ratio-item ratio-item-text text-reset" href="#!">
+                  <div class="fs-xxs fw-bold">
+                    +{{item.detalles.length - 3 }} <br> mas
+                  </div>
+                </a>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="row gx-5">
+            <div class="col-12">
+  
+              <!-- Button -->
+              <a class="btn btn-sm w-100 btn-outline-dark" [routerLink]="['/cuenta/ventas-detalle/',item.venta._id]" >
+                Detalle de Orden
+              </a>
+  
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>

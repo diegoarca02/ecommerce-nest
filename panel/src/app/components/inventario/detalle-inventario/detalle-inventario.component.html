@@ -1,0 +1,213 @@
+
+<div class="d-flex flex-column flex-root">
+    <!--begin::Page-->
+    <div class="page d-flex flex-row flex-column-fluid">
+        <!--begin::Aside-->
+        <app-sidebar></app-sidebar>
+        <!--end::Aside-->
+        <!--begin::Wrapper-->
+        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+            <!--begin::Header-->
+            <app-topbar></app-topbar>
+            <!--end::Header-->
+            <!--begin::Content-->
+            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                <!--begin::Toolbar-->
+                <div class="toolbar" id="kt_toolbar">
+                    <!--begin::Container-->
+                    <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+                        <!--begin::Page title-->
+                        <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                            <!--begin::Title-->
+                            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Dashboard
+                            <!--begin::Separator-->
+                            <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
+                            <!--end::Separator-->
+                            <!--begin::Description-->
+                            <ol class="breadcrumb text-muted fs-6 fw-semibold">
+                                <li class="breadcrumb-item pe-3">Usuarios</li>
+                            </ol>
+                            <!--end::Description--></h1>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Page title-->
+                        <!--begin::Actions-->
+                        <div class="d-flex align-items-center py-1">
+                            
+                            <a href="#" class="btn btn-sm btn-primary">
+                                Create</a>
+                            <!--end::Button-->
+                        </div>
+                        <!--end::Actions-->
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Toolbar-->
+                <!--begin::Post-->
+                <div class="post d-flex flex-column-fluid" id="kt_post">
+                    <!--begin::Container-->
+                    <div id="kt_content_container" class="container-xxl">
+                        
+                        <div class="row gy-5 g-xl-8">
+                            <div class="col-12">
+                                <div class="card mb-10">
+                                    <!--begin::Card header-->
+                                    <div class="card-header py-7" style="border-bottom: 0px;    padding-bottom: 10px !important;">
+                                        <h3 class="card-title align-items-start flex-column">
+                                            <span class="card-label text-gray-800 fw-700">Inventario de variación</span>
+                                            <span class="text-gray-400 mt-1 fw-semibold fs-6 d-none d-sm-block">
+                                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, laboriosam.
+                                            </span>
+                                        </h3>
+                                        <!--end::Title-->
+                                
+                                        
+                                    </div>
+                                    <!--end::Card header-->
+                                   
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-4 pb-4">
+                                        <div class="row mb-3">
+                                            <div class="col mb-7">
+                                                <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                                    <span class="fs-4 fw-semibold text-dark pb-1 px-2">Color</span>
+                                                    <div class="d-flex">
+                                                        <a class="symbol symbol-50px text-white me-3" [ngStyle]="{'background-color': variacion.hxd}" style="width: 30px !important; height: 30px !important;border: 1px dashed #ccc;">
+                                                            <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
+                                                                <span>{{variacion.talla}}</span>
+                                                            </div>
+                                                        </a>
+                                                        <span class="fs-lg-2tx fw-bold d-flex justify-content-center" style="font-size: 2rem!important;">{{variacion.color}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col mb-7">
+                                                <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                                    <span class="fs-4 fw-semibold text-dark pb-1 px-2">
+                                                        SKU
+                                                    </span>
+                                                    <span class="fs-lg-2tx fw-bold d-flex justify-content-center" style="font-size: 1.8rem!important;">
+                                                    {{variacion.sku}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col mb-7">
+                                                <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                                    <span class="fs-4 fw-semibold text-dark pb-1 px-2">
+                                                        Unidades
+                                                    </span>
+                                                    <span class="fs-lg-2tx fw-bold d-flex justify-content-center" style="font-size: 1.8rem!important;">
+                                                       {{unidades.length}}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+
+                                                <div class="card-title pt-3 mb-3 gap-4 gap-lg-10 gap-xl-15 nav nav-tabs border-bottom-0">
+                                                    <!--begin::Tab item-->
+                                                    <div class="fs-4 fw-bold pb-3 cursor-pointer" [ngClass]="{'border-bottom border-3 border-primary': almacen_active == item.almacen}" *ngFor="let item of almacenes" (click)="setAlmacen(item.almacen)">
+                                                        {{item.almacen}} ({{item.unidades.length}})
+                                                    </div>
+                                                    <!--end::Tab item-->
+                                                </div>
+
+                                                <div class="table-responsive">
+                                                    <table class="table align-middle table-row-dashed fs-6 gy-3 dataTable no-footer">
+                                                        <!--begin::Table body-->
+                                                        <tbody class="fw-bold text-gray-600">
+                                                            <tr class="odd" *ngFor="let item of unidades_active; let idx = index">
+                                                                <td>
+                                                                    <a class="text-gray-800 text-hover-primary">#{{item.codigo}}</a>
+                                                                </td>
+                                                                
+                                                                <td class="text-end">
+                                                                   {{item.ingreso.proveedor}}                         
+                                                                </td>
+                                                                
+                                                                <td class="text-end">
+                                                                    <a [routerLink]="['/ingresos/detail',item.ingreso._id]"  class=" text-primary">
+                                                                        {{item.ingreso.createdAt|date:'YYYY'}}-{{item.ingreso.codigo.toString().padStart(6,'000000')}}
+                                                                    </a>
+                                                                </td>
+                                                                
+                                                                <td class="text-end">
+                                                                   <a href="" class="btn btn-icon btn-sm btn-light btn-active-primary w-25px h-25px" data-bs-toggle="modal" [attr.data-bs-target]="'#BCModal-'+item._id">
+                                                                    <span class="svg-icon svg-icon-muted .icon-size-5"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path opacity="0.3" d="M3 6C2.4 6 2 5.6 2 5V3C2 2.4 2.4 2 3 2H5C5.6 2 6 2.4 6 3C6 3.6 5.6 4 5 4H4V5C4 5.6 3.6 6 3 6ZM22 5V3C22 2.4 21.6 2 21 2H19C18.4 2 18 2.4 18 3C18 3.6 18.4 4 19 4H20V5C20 5.6 20.4 6 21 6C21.6 6 22 5.6 22 5ZM6 21C6 20.4 5.6 20 5 20H4V19C4 18.4 3.6 18 3 18C2.4 18 2 18.4 2 19V21C2 21.6 2.4 22 3 22H5C5.6 22 6 21.6 6 21ZM22 21V19C22 18.4 21.6 18 21 18C20.4 18 20 18.4 20 19V20H19C18.4 20 18 20.4 18 21C18 21.6 18.4 22 19 22H21C21.6 22 22 21.6 22 21Z" fill="currentColor"/>
+                                                                        <path d="M3 16C2.4 16 2 15.6 2 15V9C2 8.4 2.4 8 3 8C3.6 8 4 8.4 4 9V15C4 15.6 3.6 16 3 16ZM13 15V9C13 8.4 12.6 8 12 8C11.4 8 11 8.4 11 9V15C11 15.6 11.4 16 12 16C12.6 16 13 15.6 13 15ZM17 15V9C17 8.4 16.6 8 16 8C15.4 8 15 8.4 15 9V15C15 15.6 15.4 16 16 16C16.6 16 17 15.6 17 15ZM9 15V9C9 8.4 8.6 8 8 8H7C6.4 8 6 8.4 6 9V15C6 15.6 6.4 16 7 16H8C8.6 16 9 15.6 9 15ZM22 15V9C22 8.4 21.6 8 21 8H20C19.4 8 19 8.4 19 9V15C19 15.6 19.4 16 20 16H21C21.6 16 22 15.6 22 15Z" fill="currentColor"/>
+                                                                        </svg>
+                                                                        </span>
+                                                                   </a>
+
+                                                                   <div class="modal fade" id="BCModal-{{item._id}}" tabindex="-1" style="display: none;" aria-hidden="true">
+                                                                    <!--begin::Modal dialog-->
+                                                                    <div class="modal-dialog mw-650px">
+                                                                        <!--begin::Modal content-->
+                                                                        <div class="modal-content">
+                                                                            <!--begin::Modal header-->
+                                                                            <div class="modal-header pb-0 border-0 justify-content-end">
+                                                                                <!--begin::Close-->
+                                                                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                                                                    <span class="svg-icon svg-icon-muted svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"/>
+                                                                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"/>
+                                                                                        </svg>
+                                                                                        
+                                                                                        </span>
+                                                                                </div>
+                                                                                <!--end::Close-->
+                                                                            </div>
+                                                                            <!--begin::Modal header-->
+                                                                
+                                                                            <!--begin::Modal body-->
+                                                                            <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 ">
+                                                                                <!--begin::Heading-->
+                                                                                <div class="text-center mb-13">
+                                                                                    <!--begin::Title-->
+                                                                                    <h1 class="mb-3">{{item.codigo}}</h1>
+                                                                                    <!--end::Title-->
+                                                                
+                                                                                    <!--begin::Description-->
+                                                                                    <div class="text-muted fw-semibold fs-5 mb-7">
+                                                                                        Código de barras generado por la unidad de producto
+                                                                                    </div>
+                                                                                    <!--end::Description-->
+
+                                                                                    <svg class="jsbc" id="barcode-{{idx}}"></svg>
+
+                                                                                </div>
+                                                                                <!--end::Heading-->
+                                                                
+                                                                            </div>
+                                                                            <!--end::Modal body-->
+                                                                        </div>
+                                                                        <!--end::Modal content-->
+                                                                    </div>
+                                                                    <!--end::Modal dialog-->
+                                                                </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <!--end::Table body-->
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Post-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+</div>

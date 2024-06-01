@@ -1,0 +1,97 @@
+<app-navbar></app-navbar>
+<app-bar></app-bar>
+
+<!-- BREADCRUMB -->
+<nav class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+  
+          <!-- Breadcrumb -->
+          <ol class="breadcrumb mb-0 fs-xs text-gray-400">
+            <li class="breadcrumb-item">
+                <a class="text-reset" [routerLink]="['/']">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">
+              Mis Direcciones
+            </li>
+          </ol>
+  
+        </div>
+      </div>
+    </div>
+</nav>
+  
+<!-- CONTENT -->
+<section class="pt-7 pb-12">
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+
+            <!-- Heading -->
+            <h3 class="mb-10">
+                <ng-container *ngIf="route == 'perfil'">
+                    Mi Perfíl
+                </ng-container>
+                <ng-container *ngIf="route == 'direcciones'">
+                    Mis Direcciones
+                </ng-container>
+                <ng-container *ngIf="route == 'direcciones-create'">
+                    Nueva Dirección
+                </ng-container>
+                <ng-container *ngIf="route == 'ventas'">
+                    Ventas
+                </ng-container>
+                <ng-container *ngIf="route == 'ventas-detalle'">
+                    Detalle Ventas
+                </ng-container>
+            </h3>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-3">
+
+            <!-- Nav -->
+            <nav class="mb-10 mb-md-0">
+            <div class="list-group list-group-sm list-group-strong list-group-flush-x">
+                <a [routerLink]="['/cuenta/perfil']" class="list-group-item list-group-item-action dropend-toggle ">
+                    Perfil
+                </a>
+                <a [routerLink]="['/cuenta/direcciones']" class="list-group-item list-group-item-action dropend-toggle ">
+                    Direcciones
+                </a>
+                <a [routerLink]="['/cuenta/ventas']" class="list-group-item list-group-item-action dropend-toggle ">
+                    Ventas
+                </a>
+                
+            </div>
+            </nav>
+
+        </div>
+        <div class="col-12 col-md-9 col-lg-8 offset-lg-1">
+
+            <ng-container *ngIf="route == 'perfil'">
+                <app-perfil-cuenta></app-perfil-cuenta>
+            </ng-container>
+            <ng-container *ngIf="route == 'direcciones'">
+                <app-index-direccion></app-index-direccion>
+            </ng-container>
+            <ng-container *ngIf="route == 'direcciones-create'">
+                <app-create-direccion></app-create-direccion>
+            </ng-container>
+            <ng-container *ngIf="route == 'direccion-edit'">
+                <app-edit-direccion [iddireccion]="id"></app-edit-direccion>
+            </ng-container>
+            <ng-container *ngIf="route == 'ventas'">
+                <app-index-venta></app-index-venta>
+            </ng-container>
+            <ng-container *ngIf="route == 'ventas-detalle'">
+                <app-detalle-venta></app-detalle-venta>
+            </ng-container>
+        </div>
+    </div>
+</div>
+</section>
+
+<app-footer></app-footer>

@@ -1,0 +1,387 @@
+
+<div class="d-flex flex-column flex-root">
+    <!--begin::Page-->
+    <div class="page d-flex flex-row flex-column-fluid">
+        <!--begin::Aside-->
+        <app-sidebar></app-sidebar>
+        <!--end::Aside-->
+        <!--begin::Wrapper-->
+        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+            <!--begin::Header-->
+            <app-topbar></app-topbar>
+            <!--end::Header-->
+            <!--begin::Content-->
+            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                <!--begin::Toolbar-->
+                <div class="toolbar" id="kt_toolbar">
+                    <!--begin::Container-->
+                    <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+                        <!--begin::Page title-->
+                        <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                            <!--begin::Title-->
+                            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Dashboard
+                            <!--begin::Separator-->
+                            <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
+                            <!--end::Separator-->
+                            <!--begin::Description-->
+                            <ol class="breadcrumb text-muted fs-6 fw-semibold">
+                                <li class="breadcrumb-item pe-3 text-muted">
+                                    <a [routerLink]="['/cupones']"  class="pe-3">Cupon</a>
+                                </li>
+                                <li class="breadcrumb-item pe-3">Nuevo cupon</li>
+                            </ol>
+                            <!--end::Description--></h1>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Page title-->
+                        <!--begin::Actions-->
+                        <div class="d-flex align-items-center py-1">
+                            
+                            <a href="#" class="btn btn-sm btn-primary">
+                                Create</a>
+                            <!--end::Button-->
+                        </div>
+                        <!--end::Actions-->
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Toolbar-->
+                <!--begin::Post-->
+                <div class="post d-flex flex-column-fluid" id="kt_post">
+                    <!--begin::Container-->
+                    <div id="kt_content_container" class="container-xxl">
+                        
+                        <div class="row gy-5 g-xl-8">
+                            <div class="col-12">
+                                <div class="card mb-10 mb-xl-5">
+                                    <!--begin::Card header-->
+                                    <div class="card-header border-0 pt-5">
+                                        <!--begin::Card title-->
+                                        <h3 class="card-title align-items-start flex-column">
+                                            <span class="card-label fs-3 mb-1 fw-700">Nuevo cupon</span>
+                                            <span class="text-muted mt-1 fw-semibold fs-7">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aspernatur.</span>
+                                        </h3>
+                                        <div class="card-toolbar">
+                                            <button *ngIf="!btn_load" class="btn btn-dark" (click)="validar()">
+                                                <span class="svg-icon svg-icon-muted svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M9.89557 13.4982L7.79487 11.2651C7.26967 10.7068 6.38251 10.7068 5.85731 11.2651C5.37559 11.7772 5.37559 12.5757 5.85731 13.0878L9.74989 17.2257C10.1448 17.6455 10.8118 17.6455 11.2066 17.2257L18.1427 9.85252C18.6244 9.34044 18.6244 8.54191 18.1427 8.02984C17.6175 7.47154 16.7303 7.47154 16.2051 8.02984L11.061 13.4982C10.7451 13.834 10.2115 13.834 9.89557 13.4982Z" fill="currentColor"/>
+                                                    </svg>
+                                                </span>
+                                                Guardar cambios
+                                            </button>
+                                            <button *ngIf="btn_load" class="btn btn-dark" type="button" disabled>
+                                                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                Procensando...
+                                            </button>
+                                        </div>
+                                        
+                                    </div>
+                                    <!--begin::Card header-->
+                                    <div class="card-body p-9">
+                                             
+                                        <!--begin::Input group-->
+                                        <div class="row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Código</label>
+                                            <!--end::Label-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-8">
+                                                <!--begin::Row-->
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control form-control-lg form-control-solid mb-lg-0" placeholder="Código del cupón" name="codigo" [(ngModel)]="cupon.codigo"/>
+                                                    <div class="input-group-append">
+                                                      <button class="btn btn-dark" style="    border-bottom-left-radius: 0px;border-top-left-radius: 0px;">Generar</button>
+                                                    </div>
+                                                </div>
+
+                                                
+                                                <!--end::Row-->
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                        <div class="row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Tipo</label>
+                                            <!--end::Label-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-8">
+                                                <!--begin::Row-->
+                                                <select name="tipo" class="form-select form-select-lg form-select-solid mb-3 mb-lg-0" (change)="selectedTipo()" [(ngModel)]="cupon.tipo">
+                                                    <option value="" selected disabled>Seleccionar</option>
+                                                    <option value="Producto">Producto</option>
+                                                    <option value="Categoria">Categoria</option>
+                                                    <option value="General">General</option>
+                                                </select>
+                                                <!--end::Row-->
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                        <div class="row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Descuento</label>
+                                            <!--end::Label-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-8">
+                                                <!--begin::Row-->
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="number" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Porcentaje de descuento" name="descuento" [(ngModel)]="cupon.descuento"/>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="number" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Monto máximo" name="monto_max" [(ngModel)]="cupon.monto_max"/>
+                                                    </div>
+                                                </div>
+                                                <!--end::Row-->
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                        <div class="row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Aplicación</label>
+                                            <!--end::Label-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-8">
+                                                <!--begin::Row-->
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="date" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"  name="f_inicio" [(ngModel)]="cupon.f_inicio"/>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="date" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"  name="f_fin" [(ngModel)]="cupon.f_fin"/>
+                                                    </div>
+                                                </div>
+                                                <!--end::Row-->
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                        <div class="row mb-3">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Canjes</label>
+                                            <!--end::Label-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-8">
+                                                <!--begin::Row-->
+                                                <input type="number" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Número de canjes" name="canjes" [(ngModel)]="cupon.canjes"/>
+                                                <!--end::Row-->
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                    </div>
+                                    <!-- <div class="card-footer">
+                                        <button *ngIf="!btn_load" type="button" class="btn btn-dark" (click)="registrar()">
+                                            Crear categoria
+                                        </button>
+                                        <button *ngIf="btn_load" class="btn btn-dark" type="button" disabled>
+                                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                            Procensando...
+                                        </button>
+                                    </div> -->
+                                </div>
+
+                                <div class="card" *ngIf="cupon.tipo != 'General'">
+                                    <div class="card-header border-0 pt-5" *ngIf="cupon.tipo == 'Producto'">
+                                        <!--begin::Card title-->
+                                        <h3 class="card-title align-items-start flex-column">
+                                            <span class="card-label fs-3 mb-1 fw-700">Productos</span>
+                                            <span class="text-muted mt-1 fw-semibold fs-7">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aspernatur.</span>
+                                        </h3>
+                                    </div>
+                                    <div class="card-header border-0 pt-5" *ngIf="cupon.tipo == 'Categoria'">
+                                        <!--begin::Card title-->
+                                        <h3 class="card-title align-items-start flex-column">
+                                            <span class="card-label fs-3 mb-1 fw-700">Categorias</span>
+                                            <span class="text-muted mt-1 fw-semibold fs-7">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aspernatur.</span>
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <ng-container *ngIf="cupon.tipo == 'Producto'">
+                                            <div  class="w-100 position-relative mb-5">	
+                                                    <!--begin::Hidden input(Added to disable form autocomplete)-->
+                                                    <input type="hidden">
+                                                    <!--end::Hidden input-->
+                                                
+                                                    <!--begin::Icon-->
+                                                                    
+                                                    <span class="svg-icon svg-icon-muted svg-icon-3 position-absolute top-50 ms-5 translate-middle-y"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z" fill="currentColor"/>
+                                                        <path opacity="0.3" d="M11 20C6 20 2 16 2 11C2 6 6 2 11 2C16 2 20 6 20 11C20 16 16 20 11 20ZM11 4C7.1 4 4 7.1 4 11C4 14.9 7.1 18 11 18C14.9 18 18 14.9 18 11C18 7.1 14.9 4 11 4ZM8 11C8 9.3 9.3 8 11 8C11.6 8 12 7.6 12 7C12 6.4 11.6 6 11 6C8.2 6 6 8.2 6 11C6 11.6 6.4 12 7 12C7.6 12 8 11.6 8 11Z" fill="currentColor"/>
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Icon-->
+                                                
+                                                    <!--begin::Input-->
+                                                    <input type="text" class="form-control form-control-lg form-control-solid px-15" placeholder="Buscar producto" name="filtro_producto" [(ngModel)]="filtro_producto" (keyup)="searchProducto()">
+                                                    <!--end::Input-->
+                                                
+                                                    <!--begin::Spinner-->
+                                                    <span *ngIf="load_productos" class="position-absolute top-50 end-0 translate-middle-y lh-0 me-5">
+                                                        <span class="spinner-border h-15px w-15px align-middle text-muted"></span>
+                                                    </span>
+                                                    <!--end::Spinner-->
+        
+                                            </div>
+    
+                                            <div class="table-responsive" style="max-height: 315px;">
+                                                <!--begin::Table-->
+                                                <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
+                                                    <tbody>                       
+                                                        <tr *ngFor="let item of productos">                            
+                                                            <td>
+                                                                <div class="d-flex">
+                                                                        
+                                                                    <a class="symbol symbol-40px">
+                                                                        <span class="symbol-label" style="background-image:url({{url}}/getProductoPortada/{{item.producto.portada}});"></span>
+                                                                    </a>
+                                                                    <!--end::Thumbnail-->
+                                                                    <div class="ms-5" style="max-width: 300px !important">
+                                                                        <!--begin::Title-->
+                                                                        <a class="text-gray-800 fs-6 fw-bold text-1 fw-600 cursor-pointer" style="font-size: 1rem!important;font-weight: 600 !important;">
+                                                                        {{item.producto.titulo}}
+                                                                        </a>
+                                                                        <br>
+                                                                        <code>
+                                                                            {{item.producto.categoria.titulo}}
+                                                                            -
+                                                                            {{item.producto.subcategoria}}
+                                                                        </code>
+                                                                        
+                                                                    </div>   
+                                                                </div>                          
+                                                            </td>
+                                                            <td class="text-end pe-0 min-w-200px">
+                                                                <div class="symbol-group symbol-hover flex-grow-1 min-w-100px pe-2">
+                                                                        
+                                                                    <!--begin::User-->
+                                                                    <div class="symbol symbol-circle symbol-25px" *ngFor="let subitem of item.variaciones">
+                                                                        <div style="cursor: pointer;border: 1px dashed #ccc;" class="symbol-label fs-8 fw-semibold text-inverse-primary" [ngStyle]="{'background-color': subitem.hxd}">
+                                                                            {{subitem.talla}}
+                                                                            </div>
+                                                                    </div>
+                                                                    <!--end::User-->
+                                                                </div>
+                                                            </td>
+    
+                                                            <td class="text-end">
+                                                                <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" (click)="addDetalle('Producto',item)">
+                                                                    <span class="svg-icon svg-icon-muted svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M9.89557 13.4982L7.79487 11.2651C7.26967 10.7068 6.38251 10.7068 5.85731 11.2651C5.37559 11.7772 5.37559 12.5757 5.85731 13.0878L9.74989 17.2257C10.1448 17.6455 10.8118 17.6455 11.2066 17.2257L18.1427 9.85252C18.6244 9.34044 18.6244 8.54191 18.1427 8.02984C17.6175 7.47154 16.7303 7.47154 16.2051 8.02984L11.061 13.4982C10.7451 13.834 10.2115 13.834 9.89557 13.4982Z" fill="currentColor"/>
+                                                                        </svg>
+                                                                    </span>                                                                              
+                                                                </button>
+                                                            </td>
+                                                        </tr>                      
+                                                    </tbody>
+                                                    <!--end::Table body-->
+                                                </table>
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="cupon.tipo == 'Categoria'">
+                                            <div  class="w-100 position-relative mb-5">	
+                                                <!--begin::Hidden input(Added to disable form autocomplete)-->
+                                                <input type="hidden">
+                                                <!--end::Hidden input-->
+                                            
+                                                <!--begin::Icon-->
+                                                                 
+                                                <span class="svg-icon svg-icon-muted svg-icon-3 position-absolute top-50 ms-5 translate-middle-y"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z" fill="currentColor"/>
+                                                    <path opacity="0.3" d="M11 20C6 20 2 16 2 11C2 6 6 2 11 2C16 2 20 6 20 11C20 16 16 20 11 20ZM11 4C7.1 4 4 7.1 4 11C4 14.9 7.1 18 11 18C14.9 18 18 14.9 18 11C18 7.1 14.9 4 11 4ZM8 11C8 9.3 9.3 8 11 8C11.6 8 12 7.6 12 7C12 6.4 11.6 6 11 6C8.2 6 6 8.2 6 11C6 11.6 6.4 12 7 12C7.6 12 8 11.6 8 11Z" fill="currentColor"/>
+                                                    </svg>
+                                                </span>
+                                                <!--end::Icon-->
+                                            
+                                                <!--begin::Input-->
+                                                <input (keyup)="searchCategoria()" type="text" name="filtro_categoria" [(ngModel)]="filtro_categoria" class="form-control form-control-lg form-control-solid px-15" placeholder="Buscar categoria">
+                                                <!--end::Input-->
+                                            
+                                                <!--begin::Spinner-->
+                                                <span *ngIf="load_categorias" class="position-absolute top-50 end-0 translate-middle-y lh-0 me-5">
+                                                    <span class="spinner-border h-15px w-15px align-middle text-muted"></span>
+                                                </span>
+                                                <!--end::Spinner-->
+    
+                                            </div>
+                                            
+                                            <div class="table-responsive" style="max-height: 315px;">
+                                                <table class="table align-middle table-row-dashed fs-6 gy-3 dataTable no-footer" >
+                                                    <!--begin::Table body-->
+                                                    <tbody class="fw-bold text-gray-600">
+                                                            <tr class="odd" *ngFor="let item of categorias">
+                                                                <td>
+                                                                    <div class="d-flex justify-content-start flex-column">
+                                                                        <a class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{item.titulo}}</a>
+                                                                        <span class="text-gray-400 fw-semibold d-block fs-7">{{item.genero}}</span>
+                                                                    </div>
+                                                                </td>
+                                                                
+                                                                
+                                                                
+                                                                <td class="text-end">
+                                                                    <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" (click)="addDetalle('Categoria',item)">
+                                                                        <span class="svg-icon svg-icon-muted svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path d="M9.89557 13.4982L7.79487 11.2651C7.26967 10.7068 6.38251 10.7068 5.85731 11.2651C5.37559 11.7772 5.37559 12.5757 5.85731 13.0878L9.74989 17.2257C10.1448 17.6455 10.8118 17.6455 11.2066 17.2257L18.1427 9.85252C18.6244 9.34044 18.6244 8.54191 18.1427 8.02984C17.6175 7.47154 16.7303 7.47154 16.2051 8.02984L11.061 13.4982C10.7451 13.834 10.2115 13.834 9.89557 13.4982Z" fill="currentColor"/>
+                                                                            </svg>
+                                                                        </span>                                                                              
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                    </tbody>
+                                                    <!--end::Table body-->
+                                                </table>
+                                            </div>
+                                        </ng-container>
+
+                                        <div class="separator separator-dashed my-3">
+                                        </div>
+
+                                        <div class="table-responsive">
+                                            <table class="table align-middle table-row-dashed fs-6 gy-3 dataTable no-footer" >
+                                                <!--begin::Table body-->
+                                                <tbody class="fw-bold text-gray-600">
+                                                    <tr class="odd" *ngFor="let item of detalles; let idx = index">
+                                                        <td>
+                                                            <div class="d-flex justify-content-start flex-column">
+                                                                <a class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">
+                                                                    {{item.titulo}}
+                                                                </a>
+                                                                <span class="text-gray-400 fw-semibold d-block fs-7">
+                                                                    {{item.tipo}}
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        
+                                                        
+                                                        
+                                                        <td class="text-end">
+                                                            <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" (click)="remove(idx)">
+                                                                <span class="svg-icon svg-icon-muted svg-icon-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"/>
+                                                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"/>
+                                                                    </svg>
+                                                                </span>                            
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <!--end::Table body-->
+                                            </table>
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Post-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+</div>

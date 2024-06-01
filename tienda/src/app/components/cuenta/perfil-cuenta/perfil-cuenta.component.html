@@ -1,0 +1,76 @@
+<div class="row" *ngIf="!load_data">
+    <div class="col-12 col-md-6">
+
+      <!-- Email -->
+      <div class="form-group">
+        <label class="form-label" for="accountFirstName">
+          Nombres *
+        </label>
+        <input readonly class="form-control form-control-sm" type="text" placeholder="Nombres Completos" required [value]="cliente.nombres">
+      </div>
+
+    </div>
+    <div class="col-12 col-md-6">
+
+      <!-- Email -->
+      <div class="form-group">
+        <label class="form-label" for="accountLastName">
+          Apellidos *
+        </label>
+        <input readonly class="form-control form-control-sm" type="text" placeholder="Apellidos Completos" required [value]="cliente.apellidos">
+      </div>
+
+    </div>
+
+    <div class="col-12 col-md-12">
+
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label" for="accountLastName">
+            Correo electrónico *
+          </label>
+          <input readonly class="form-control form-control-sm" type="email" placeholder="Correo electrónico" required [value]="cliente.email">
+        </div>
+  
+    </div>
+
+    <div class="col-12">
+      <hr>
+    </div>
+
+    <div class="col-12 col-md-6">
+
+      <!-- Email -->
+      <div class="form-group">
+        <label class="form-label" for="accountFirstName">
+          Nueva Contraseña *
+        </label>
+        <input class="form-control form-control-sm" type="password" placeholder="Nueva Contraseña" required name="password" [(ngModel)]="password">
+      </div>
+
+    </div>
+    <div class="col-12 col-md-6">
+
+      <!-- Email -->
+      <div class="form-group">
+        <label class="form-label" for="accountLastName">
+          Confirmación de Contraseña *
+        </label>
+        <input class="form-control form-control-sm" type="password" placeholder="Confirmación de Contraseña" required name="password_c" [(ngModel)]="password_c">
+      </div>
+
+    </div>
+    
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <button class="btn btn-dark" (click)="update_psw()">Actualizar contraseña</button>
+
+      <span *ngIf="msm_error_psw" class="text-danger">{{msm_error_psw}}</span>
+      <span *ngIf="msm_success_psw" class="text-success">{{msm_success_psw}}</span>
+    </div>
+</div>
+
+<div class="text-center py-10" *ngIf="load_data">
+  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

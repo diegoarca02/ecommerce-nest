@@ -1,0 +1,404 @@
+
+<div class="d-flex flex-column flex-root">
+    <!--begin::Page-->
+    <div class="page d-flex flex-row flex-column-fluid">
+        <!--begin::Aside-->
+        <app-sidebar></app-sidebar>
+        <!--end::Aside-->
+        <!--begin::Wrapper-->
+        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+            <!--begin::Header-->
+            <app-topbar></app-topbar>
+            <!--end::Header-->
+            <!--begin::Content-->
+            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                <!--begin::Toolbar-->
+                <div class="toolbar" id="kt_toolbar">
+                    <!--begin::Container-->
+                    <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+                        <!--begin::Page title-->
+                        <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                            <!--begin::Title-->
+                            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Dashboard
+                            <!--begin::Separator-->
+                            <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
+                            <!--end::Separator-->
+                            <!--begin::Description-->
+                            <ol class="breadcrumb text-muted fs-6 fw-semibold">
+                                <li class="breadcrumb-item pe-3 text-muted">
+                                    <a [routerLink]="['/producto']"  class="pe-3">Productos</a>
+                                </li>
+                                <li class="breadcrumb-item pe-3">Nuevo producto</li>
+                            </ol>
+                            <!--end::Description--></h1>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Page title-->
+                        <!--begin::Actions-->
+                        <div class="d-flex align-items-center py-1">
+                            
+                            <a href="#" class="btn btn-sm btn-primary">
+                                Create</a>
+                            <!--end::Button-->
+                        </div>
+                        <!--end::Actions-->
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Toolbar-->
+                <!--begin::Post-->
+                <div class="post d-flex flex-column-fluid" id="kt_post">
+                    <!--begin::Container-->
+                    <div id="kt_content_container" class="container-xxl">
+                        
+                        <div class="row gy-5 g-xl-8">
+                            <div class="col-12">
+                                <div class="card" >
+                                    <!--begin::Card body-->
+                                    <div class="card-body" >
+                                        <!--begin::Stepper-->
+                                        <div class="stepper stepper-links d-flex flex-column pt-15" id="kt_create_account_stepper" data-kt-stepper="true" >
+                                            <!--begin::Nav-->
+                                            <div class="stepper-nav mb-5" >
+                                                <!--begin::Step 1-->
+                                                <div (click)="setActive(1)" class="stepper-item" style="cursor: pointer;" [ngClass]="{'current': active == 1}">
+                                                    <h4 class="stepper-title">General</h4>
+                                                </div>
+                                                <div (click)="setActive(2)" class="stepper-item" style="cursor: pointer;" [ngClass]="{'current': active == 2}">
+                                                    <h4 class="stepper-title">Variaciones</h4>
+                                                </div>
+                                                <div (click)="setActive(3)" class="stepper-item" style="cursor: pointer;" [ngClass]="{'current': active == 3}">
+                                                    <h4 class="stepper-title">Galería</h4>
+                                                </div>
+                                            </div>
+                                            <!--end::Nav-->
+                                            <!--begin::Form-->
+                                            <div [hidden]="active != 1" class="mx-auto mw-700px w-100 pt-15 pb-10 fv-plugins-bootstrap5 fv-plugins-framework">
+                                                <!--begin::Step 1-->
+                                                <div>
+                                                    <div class="w-100" >
+                                                        <!--begin::Heading-->
+                                                        <div class="pb-10 pb-lg-15" >
+                                                            <!--begin::Title-->
+                                                            <h2 class="d-flex align-items-center text-dark fw-700">
+                                                                Nuevo producto
+                                                            </h2>
+                                                            <!--end::Title-->
+                                                            <!--begin::Notice-->
+                                                            <div class="text-muted fw-semibold fs-6" >
+                                                                Datos generales del nuevo producto.
+                                                            </div>
+                                                            <!--end::Notice-->
+                                                        </div>
+                                                        <!--end::Heading-->
+                                                        
+                                                        <!--begin::Input group-->
+                                                        <div class="row">
+                                                            <div class="fv-row mb-10">
+                                                                <label class="form-label required">
+                                                                    Título
+                                                                </label>
+                                                                <input type="text" class="form-control form-control-solid mb-2" placeholder="Nombre del producto" name="titulo" [(ngModel)]="producto.titulo"/>
+                                                                <div class="text-muted fs-7">Se requiere un nombre de producto y se recomienda que sea único.</div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end::Input group-->
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="fv-row mb-10">
+                                                                    <label class="form-label required">
+                                                                        Clasificacion
+                                                                    </label>
+                                                                    <select name="clasificacion" [(ngModel)]="producto.clasificacion" class="form-select form-select-solid mb-2" (change)="setClasificacion()">
+                                                                        <option value="" selected disabled>Seleccionar</option>
+                                                                        <option value="Masculino">Masculino</option>
+                                                                        <option value="Femenino">Femenino</option>
+                                                                        <option value="Niños">Niños</option>
+                                                                        <option value="Niñas">Niñas</option>
+                                                                    </select>
+                                                                    <div class="text-muted fs-7">Lorem ipsum dolor sit amet.</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="fv-row mb-10">
+                                                                    <label class="form-label required">
+                                                                        Categoria
+                                                                    </label>
+                                                                    <select name="categoria" [(ngModel)]="producto.categoria" class="form-select form-select-solid mb-2" (change)="setCategoria()">
+                                                                        <option value="" selected disabled>Seleccionar</option>
+                                                                        <option [value]="item._id" *ngFor="let item of categorias">{{item.titulo}}</option>
+                                                                    </select>
+                                                                    <div class="text-muted fs-7">Lorem ipsum dolor sit amet.</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="fv-row mb-10">
+                                                                    <label class="form-label required">
+                                                                        Subcategoria
+                                                                    </label>
+                                                                    <select name="subcategoria" [(ngModel)]="producto.subcategoria" class="form-select form-select-solid mb-2">
+                                                                        <option value="" selected disabled>Seleccionar</option>
+                                                                        <option [value]="item" *ngFor="let item of subcategorias">{{item}}</option>
+                                                                    </select>
+                                                                    <div class="text-muted fs-7">Lorem ipsum dolor sit amet.</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="fv-row mb-10">
+                                                                <label class="form-label required">
+                                                                    Descripción
+                                                                </label>
+                                                                <textarea class="form-control form-control-solid mb-2" name="descripcion" placeholder="Contenido descriptivo del producto" [(ngModel)]="producto.descripcion"></textarea>
+                                                           
+                                                                <div class="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>
+                                                            </div>
+                                                        </div>
+                                                        <!--begin::Input group-->
+                                                        <div class="row">
+                                                            <div class="fv-row mb-10">
+                                                                <label class="form-label required">
+                                                                    Etiquetas
+                                                                </label>
+                                                                <input type="text" class="form-control form-control-solid mb-2" id="kt_tagify" placeholder="Etiquetas del producto"/>
+                                                                <div class="text-muted fs-7">Se requiere un nombre de producto y se recomienda que sea único.</div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end::Input group-->
+                                                    </div>
+                                                </div>
+                            
+                                            </div>
+                                            <!--end::Form-->
+                                            <div [hidden]="active != 2"  class="mx-auto mw-700px w-100 pt-15 pb-10 fv-plugins-bootstrap5 fv-plugins-framework">
+                                                <div>
+                                                    <div class="w-100" >
+                                                        <!--begin::Heading-->
+                                                        <div class="pb-10 pb-lg-15" >
+                                                            <!--begin::Title-->
+                                                            <h2 class="d-flex align-items-center text-dark fw-700">
+                                                                Agregar variaciones
+                                                            </h2>
+                                                            <!--end::Title-->
+                                                            <!--begin::Notice-->
+                                                            <div class="text-muted fw-semibold fs-6" >
+                                                                Variaciones del producto registrado.
+                                                            </div>
+                                                            <!--end::Notice-->
+                                                        </div>
+                                                        <!--end::Heading-->
+                                                
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="fv-row mb-5">
+                                                                    <label class="form-label required">
+                                                                        Color
+                                                                    </label>
+                                                                    <input type="text" class="form-control form-control-solid" id="colorpicker">
+                                                                    <div class="text-muted fs-7">Lorem ipsum dolor sit amet.</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="fv-row mb-5">
+                                                                    <label class="form-label required">
+                                                                        Color base
+                                                                    </label>
+                                                                    <select class="form-select form-select-solid mb-2" name="color" [(ngModel)]="variacion.color">
+                                                                        <option value="" selected disabled>Seleccionar</option>
+                                                                        <option [value]="item" *ngFor="let item of colores">{{item}}</option>
+                                                                    </select>
+                                                                    <div class="text-muted fs-7">Lorem ipsum dolor sit amet.</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="fv-row mb-5">
+                                                                    <label class="form-label required">
+                                                                        Talla
+                                                                    </label>
+                                                                    <select  name="talla" [(ngModel)]="variacion.talla" class="form-select form-select-solid mb-2">
+                                                                        <option value="" selected disabled>Seleccionar</option>
+                                                                        <option [value]="item" *ngFor="let item of tallas">{{item}}</option>
+                                                                    </select>
+                                                                    <div class="text-muted fs-7">Lorem ipsum dolor sit amet.</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 mb-5">
+                                                                <small (click)="add_variacion()" class="text-primary cursor-pointer">Agregar variedad</small>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="table-responsive" >
+                                                                    <!--begin::Table-->
+                                                                    <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
+                                                                            
+                                                                        <!--begin::Table body-->
+                                                                        <tbody>
+                                                                            <tr *ngFor="let item of variaciones; let idx = index">
+                                                                                <td class="max-w-100px">
+                                                                                    <div class="d-flex align-items-center">
+                                                                                        <a class="symbol symbol-50px"  style="cursor: pointer;border: 1px dashed #ccc;">
+                                                                                            <span class="symbol-label" [ngStyle]="{'background': item.hxd}"></span>
+                                                                                        </a>
+                                                                                        <div class="d-flex justify-content-start flex-column ms-5">
+                                                                                            <a class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">
+                                                                                                {{item.color}}
+                                                                                            </a>
+                                                                                            <span class="text-gray-400 fw-semibold d-block fs-7">Color base</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                
+                                                                                <td class="pe-0">
+                                                                                    <!--begin::Label-->
+                                                                                    <a class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">
+                                                                                       {{item.talla}}
+                                                                                    </a>
+                                                                                    <span class="text-gray-400 fw-semibold d-block fs-7">Talla</span>
+                                                                                </td>
+                                                                                
+                                                                                
+                                                                                <td class="text-end">
+                                                                                    <a style="cursor: pointer;" class="btn btn-sm btn-icon btn-bg-danger w-30px h-30px" (click)="remove_variacion(idx)">
+                                                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+                                                                                        
+                                                                                        <span class="svg-icon svg-icon-5 svg-icon-white"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                            <path opacity="0.3" d="M6 19.7C5.7 19.7 5.5 19.6 5.3 19.4C4.9 19 4.9 18.4 5.3 18L18 5.3C18.4 4.9 19 4.9 19.4 5.3C19.8 5.7 19.8 6.29999 19.4 6.69999L6.7 19.4C6.5 19.6 6.3 19.7 6 19.7Z" fill="currentColor"/>
+                                                                                            <path d="M18.8 19.7C18.5 19.7 18.3 19.6 18.1 19.4L5.40001 6.69999C5.00001 6.29999 5.00001 5.7 5.40001 5.3C5.80001 4.9 6.40001 4.9 6.80001 5.3L19.5 18C19.9 18.4 19.9 19 19.5 19.4C19.3 19.6 19 19.7 18.8 19.7Z" fill="currentColor"/>
+                                                                                            </svg>
+                                                                                        </span>
+                                                                                        <!--end::Svg Icon-->
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            
+                                                                        </tbody>
+                                                                        <!--end::Table body-->
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                
+                                            </div>
+
+                                            <div [hidden]="active != 3"  class="mx-auto mw-700px w-100 pt-15 pb-10 fv-plugins-bootstrap5 fv-plugins-framework">
+                                                <div>
+                                                    <div class="w-100" >
+                                                        <!--begin::Heading-->
+                                                        <div class="pb-10 pb-lg-15" >
+                                                            <!--begin::Title-->
+                                                            <h2 class="d-flex align-items-center text-dark fw-700">
+                                                                Agregar imagenes
+                                                            </h2>
+                                                            <!--end::Title-->
+                                                            <!--begin::Notice-->
+                                                            <div class="text-muted fw-semibold fs-6" >
+                                                                Lorem ipsum dolor sit amet.
+                                                            </div>
+                                                            <!--end::Notice-->
+                                                        </div>
+                                                        <!--end::Heading-->
+                                                
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="fv-row mb-5">
+                                                                    <label class="form-label required">
+                                                                        Imagen
+                                                                    </label>
+                                                                    <input type="file" class="form-control form-control-solid" id="FileInput" (change)="uploadImage($event)">
+                                                                    <div class="text-muted fs-7">Lorem ipsum dolor sit amet.</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="fv-row mb-5">
+                                                                    <label class="form-label required">
+                                                                        Título imagen
+                                                                    </label>
+                                                                    <input type="text" class="form-control form-control-solid" placeholder="Título imagen" name="imagen_titulo" [(ngModel)]="imagen_titulo">
+                                                                    <div class="text-muted fs-7">Lorem ipsum dolor sit amet.</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 mb-5">
+                                                                <small (click)="add_imagen()" class="text-primary cursor-pointer">Agregar imagen</small>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="table-responsive" >
+                                                                    <!--begin::Table-->
+                                                                    <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
+                                                                            
+                                                                        <!--begin::Table body-->
+                                                                        <tbody>
+                                                                            <tr *ngFor="let item of galeria; let idx = index">
+                                                                                <td class="max-w-100px">
+                                                                                    <div class="d-flex align-items-center">
+                                                                                        <a class="symbol symbol-50px"  style="cursor: pointer;border: 1px dashed #ccc;">
+                                                                                            <img [src]="item.str" alt="">
+                                                                                        </a>
+                                                                                        <div class="d-flex justify-content-start flex-column ms-5">
+                                                                                            <a class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">
+                                                                                                {{item.titulo}}
+                                                                                            </a>
+                                                                                            <span class="text-gray-400 fw-semibold d-block fs-7">Imagen</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="text-end">
+                                                                                    <a style="cursor: pointer;" class="btn btn-sm btn-icon btn-bg-danger w-30px h-30px" (click)="remove_imagen(idx)">
+                                                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+                                                                                        
+                                                                                        <span class="svg-icon svg-icon-5 svg-icon-white"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                            <path opacity="0.3" d="M6 19.7C5.7 19.7 5.5 19.6 5.3 19.4C4.9 19 4.9 18.4 5.3 18L18 5.3C18.4 4.9 19 4.9 19.4 5.3C19.8 5.7 19.8 6.29999 19.4 6.69999L6.7 19.4C6.5 19.6 6.3 19.7 6 19.7Z" fill="currentColor"/>
+                                                                                            <path d="M18.8 19.7C18.5 19.7 18.3 19.6 18.1 19.4L5.40001 6.69999C5.00001 6.29999 5.00001 5.7 5.40001 5.3C5.80001 4.9 6.40001 4.9 6.80001 5.3L19.5 18C19.9 18.4 19.9 19 19.5 19.4C19.3 19.6 19 19.7 18.8 19.7Z" fill="currentColor"/>
+                                                                                            </svg>
+                                                                                        </span>
+                                                                                        <!--end::Svg Icon-->
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            
+                                                                        </tbody>
+                                                                        <!--end::Table body-->
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                
+                                            </div>
+
+                                            <div class="text-center mt-10">
+                                                <button *ngIf="!btn_load" (click)="crear()" type="button" class="btn btn-dark">
+                                                    <span class="svg-icon svg-icon-3 ms-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path opacity="0.3" d="M10 18C9.7 18 9.5 17.9 9.3 17.7L2.3 10.7C1.9 10.3 1.9 9.7 2.3 9.3C2.7 8.9 3.29999 8.9 3.69999 9.3L10.7 16.3C11.1 16.7 11.1 17.3 10.7 17.7C10.5 17.9 10.3 18 10 18Z" fill="currentColor"/>
+                                                        <path d="M10 18C9.7 18 9.5 17.9 9.3 17.7C8.9 17.3 8.9 16.7 9.3 16.3L20.3 5.3C20.7 4.9 21.3 4.9 21.7 5.3C22.1 5.7 22.1 6.30002 21.7 6.70002L10.7 17.7C10.5 17.9 10.3 18 10 18Z" fill="currentColor"/>
+                                                        </svg>
+                                                    </span>
+                                                    Crear
+                                                </button>
+                                                <button *ngIf="btn_load" class="btn btn-dark" type="button" disabled>
+                                                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                    Procensando...
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--end::Stepper-->
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Post-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+</div>
